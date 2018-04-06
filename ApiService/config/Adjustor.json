@@ -1,0 +1,959 @@
+{
+  "contractName": "Adjustor",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MIN_BOND_PRINCIPAL_CU",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MIN_YIELD_PPB",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_NAME",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "DURATION_BOND_LOCK_NEXT_STATE_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MIN_DURATION_POLICY_PAUSED_DAY",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_DURATION_POLICY_PAUSED_DAY",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_DAILY_PROCESSING_OFFSET_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_DURATION_POLICY_LAPSED_DAY",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_YIELD_PPB",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "YAC_INTERVAL_DURATION_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_trustAdr",
+          "type": "address"
+        },
+        {
+          "name": "_poolAdr",
+          "type": "address"
+        },
+        {
+          "name": "_bondAdr",
+          "type": "address"
+        },
+        {
+          "name": "_bankAdr",
+          "type": "address"
+        },
+        {
+          "name": "_policyAdr",
+          "type": "address"
+        },
+        {
+          "name": "_settlementAdr",
+          "type": "address"
+        },
+        {
+          "name": "_adjustorAdr",
+          "type": "address"
+        },
+        {
+          "name": "_timerAdr",
+          "type": "address"
+        }
+      ],
+      "name": "setContractAdr",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getBankAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "dataStorage",
+      "outputs": [
+        {
+          "name": "idx",
+          "type": "uint256"
+        },
+        {
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "name": "settlementApprovalAmount_Cu",
+          "type": "uint256"
+        },
+        {
+          "name": "policyRiskPointLimit",
+          "type": "uint256"
+        },
+        {
+          "name": "serviceAgreementHash",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_DURATION_POLICY_RECONCILIATION_DAYS",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "FUNDING_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "hashMap",
+      "outputs": [
+        {
+          "name": "firstIdx",
+          "type": "uint256"
+        },
+        {
+          "name": "nextIdx",
+          "type": "uint256"
+        },
+        {
+          "name": "count",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isActive",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_POLICY_CREDIT_CU",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getPolicyAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_OPERATOR_FEE_PPT",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isValid",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "BOND_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "TRUST_FEE_PPT",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getSettlementAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PREMIUM_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getAdjustorAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "TRUST_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTimerAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_DAYLIGHT_SAVING_ADJUSTMENT_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_idx",
+          "type": "uint256"
+        }
+      ],
+      "name": "get",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "OPERATOR_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MIN_POLICY_CREDIT_CU",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "WC_POOL_TARGET_TIME_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "SETTLEMENT_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "BOND_REQUIRED_SECURITY_REFERENCE_PPT",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getContractAdr",
+      "outputs": [
+        {
+          "name": "trustContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "poolContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "bondContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "bankContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "policyContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "settlementContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "adjustorContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "timerContractAdr",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POLICY_RECONCILIATION_SAFETY_MARGIN",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTrustAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isArchived",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getBondAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "YAC_PER_INTERVAL_PPB",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_BOND_PRINCIPAL_CU",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_TIME_ZONE_OFFSET",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "DURATION_POLICY_POST_LAPSED_DAY",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "DURATION_TO_BOND_MATURITY_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ADJUSTOR_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "DURATION_WC_EXPENSE_HISTORY_DAYS",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "YAC_EXPENSE_THRESHOLD_PPT",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getPoolAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_trustAdr",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "adjustorHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "info",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogAdjustor",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_settlementApprovalAmount_Cu",
+          "type": "uint256"
+        },
+        {
+          "name": "_policyRiskPointLimit",
+          "type": "uint256"
+        },
+        {
+          "name": "_serviceAgreementHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "createAdjustor",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_adjustorHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_settlementApprovalAmount_Cu",
+          "type": "uint256"
+        },
+        {
+          "name": "_policyRiskPointLimit",
+          "type": "uint256"
+        },
+        {
+          "name": "_serviceAgreementHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "updateAdjustor",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_adjustorHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "retireAdjustor",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        },
+        {
+          "name": "_adr",
+          "type": "address"
+        },
+        {
+          "name": "_approvalAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "isAdjustorSettlementPermissioned",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        },
+        {
+          "name": "_adr",
+          "type": "address"
+        },
+        {
+          "name": "_policyRiskPoints",
+          "type": "uint256"
+        }
+      ],
+      "name": "isAdjustorPolicyPermissioned",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6060604052606060405190810160409081526001808352602083015260009082015260088151816003015560208201518160040155604082015181600501555050341561004b57600080fd5b60405160208061143f833981016040528080519150819050600160a060020a038116151561007857600080fd5b60008054600160a060020a03909216600160a060020a031990921691909117905550611396806100a96000396000f30060606040526004361061026d5763ffffffff60e060020a60003504166283f8bd8114610272578063079a6f4e146102975780630c131757146102aa5780630c432f2d1461033457806313f915dc1461034757806316193c2d1461035a578063284f90b1146103845780632b673d9b146103975780632b76d8e6146103ad5780632c1b96c9146103c0578063358327cb146103d35780633ff8ba9f146103e65780634414693c146103f95780634aa79747146104425780634af88313146104715780634cdedfe2146104c057806351b87d5f146104d3578063584b6410146104e65780635c36901c1461051d5780635e1f9f7b14610297578063648596e9146105475780636775d09b1461055a5780636a9385671461056d5780636da57da1146105835780636e2bdb951461059657806375c3357b146105a95780637be4af94146105bc5780637c812952146105cf57806383a46bd7146105fa57806384ba11ad1461060d5780638d9791a9146106205780638e244ef2146103e65780639507d39a146106335780639557cfa01461064957806395e0b2931461027257806399e93aac1461065c5780639c7b2b9b14610649578063a2e2d5c81461066f578063aa08eb2414610682578063abf290b5146106ea578063ad910d85146106fd578063b4e12b9114610710578063b6b942e814610735578063ba06ae461461074b578063ba684e091461075e578063c99b168c14610771578063d3046cec14610784578063d338997514610797578063d4dcd43714610347578063de3e0c0e1461065c578063dfc6e28414610649578063e72964ba146107bc578063f756e9f8146104c0578063f83e94a6146107cf575b600080fd5b341561027d57600080fd5b6102856107e2565b60405190815260200160405180910390f35b34156102a257600080fd5b6102856107e8565b34156102b557600080fd5b6102bd6107ef565b60405160208082528190810183818151815260200191508051906020019080838360005b838110156102f95780820151838201526020016102e1565b50505050905090810190601f1680156103265780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561033f57600080fd5b610285610826565b341561035257600080fd5b61028561082d565b341561036557600080fd5b610382600160a060020a0360043516602435604435606435610832565b005b341561038f57600080fd5b610285610a69565b34156103a257600080fd5b610382600435610a6e565b34156103b857600080fd5b610285610bd2565b34156103cb57600080fd5b610285610bd7565b34156103de57600080fd5b610285610bdc565b34156103f157600080fd5b610285610be4565b341561040457600080fd5b610382600160a060020a0360043581169060243581169060443581169060643581169060843581169060a43581169060c43581169060e43516610bea565b341561044d57600080fd5b610455610d48565b604051600160a060020a03909116815260200160405180910390f35b341561047c57600080fd5b610487600435610d57565b604051948552600160a060020a0390931660208501526040808501929092526060840152608083019190915260a0909101905180910390f35b34156104cb57600080fd5b610285610d90565b34156104de57600080fd5b610285610d95565b34156104f157600080fd5b6104f9610db9565b60405180848152602001838152602001828152602001935050505060405180910390f35b341561052857600080fd5b610533600435610dc5565b604051901515815260200160405180910390f35b341561055257600080fd5b610455610e39565b341561056557600080fd5b610285610e48565b341561057857600080fd5b610533600435610e4d565b341561058e57600080fd5b610285610ea5565b34156105a157600080fd5b610285610ec9565b34156105b457600080fd5b610455610ece565b34156105c757600080fd5b610285610edd565b34156105da57600080fd5b610382600435600160a060020a0360243516604435606435608435610f01565b341561060557600080fd5b6104556110a9565b341561061857600080fd5b6102856110b8565b341561062b57600080fd5b6104556110dc565b341561063e57600080fd5b6102856004356110eb565b341561065457600080fd5b610285611143565b341561066757600080fd5b610285611167565b341561067a57600080fd5b61028561116e565b341561068d57600080fd5b610695611173565b604051600160a060020a039889168152968816602088015294871660408088019190915293871660608701529186166080860152851660a0850152841660c0840152921660e082015261010001905180910390f35b34156106f557600080fd5b6102856111b4565b341561070857600080fd5b6104556111b9565b341561071b57600080fd5b610533600435600160a060020a03602435166044356111c8565b341561074057600080fd5b610533600435611241565b341561075657600080fd5b610455611299565b341561076957600080fd5b6102856112a8565b341561077c57600080fd5b6102856112b0565b341561078f57600080fd5b6102856112b7565b34156107a257600080fd5b610533600435600160a060020a03602435166044356112be565b34156107c757600080fd5b610285611336565b34156107da57600080fd5b61045561133b565b61271081565b624c4b4081565b60408051908101604052600c81527f48494320506f6f6c202320310000000000000000000000000000000000000000602082015281565b6202a30081565b600181565b600084803b801561084257600080fd5b60005433600160a060020a0390811691161461085d57600080fd5b600160a060020a038716151561087257600080fd5b8515158061087f57508415155b151561088a57600080fd5b83151561089657600080fd5b600c5430886040519283526c01000000000000000000000000600160a060020a039283168102602085015291160260348201526048016040518091039020925060a06040519081016040908152600c548252600160a060020a03891660208084019190915281830189905260608301889052608083018790526000868152600e9091522081518155602082015160018201805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055604082015181600201556060820151816003015560808201516004909101555073__Lib___________________________________63ec72608960088560405160e060020a63ffffffff85160281526004810192909252602482015260440160006040518083038186803b15156109c857600080fd5b5af415156109d557600080fd5b5087915050600160a060020a0388168460008051602061134b8339815191524260405190815260200160405180910390a484600160a060020a0388168460008051602061134b8339815191524260405190815260200160405180910390a483600160a060020a0388168460008051602061134b8339815191524260405190815260200160405180910390a450505050505050565b600281565b60005433600160a060020a03908116911614610a8957600080fd5b73__Lib___________________________________63199ef7be60088360405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610adf57600080fd5b5af41515610aec57600080fd5b505050604051805115156001149050610b0457600080fd5b6000818152600e602052604080822060018101805473ffffffffffffffffffffffffffffffffffffffff19169055600381018390556002019190915573__Lib___________________________________9063fa8ae1cb9060089084905160e060020a63ffffffff85160281526004810192909252602482015260440160006040518083038186803b1515610b9857600080fd5b5af41515610ba557600080fd5b50600091508190508260008051602061134b8339815191524260405190815260200160405180910390a450565b600081565b600581565b631dcd650081565b610e1081565b60005433600160a060020a03908116911614610c0557600080fd5b600160a060020a0388161515610c1a57600080fd5b600160a060020a0387161515610c2f57600080fd5b600160a060020a0386161515610c4457600080fd5b600160a060020a0385161515610c5957600080fd5b600160a060020a0384161515610c6e57600080fd5b600160a060020a0383161515610c8357600080fd5b600160a060020a0382161515610c9857600080fd5b600160a060020a0381161515610cad57600080fd5b6000805473ffffffffffffffffffffffffffffffffffffffff19908116600160a060020a039a8b1617909155600180548216988a1698909817909755600280548816968916969096179095556003805487169488169490941790935560048054861692871692909217909155600580548516918616919091179055600680548416918516919091179055600780549092169216919091179055565b600354600160a060020a031690565b600e60205260009081526040902080546001820154600283015460038401546004909401549293600160a060020a039092169290919085565b606481565b7f523009c7e41b6b3159012103fccff17371fb03621a0873eaff2f3d87cdb5fe3681565b600b54600c54600d5483565b600073__Lib___________________________________63199ef7be60088460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610e1d57600080fd5b5af41515610e2a57600080fd5b50505060405180519392505050565b600454600160a060020a031690565b603281565b600073__Lib___________________________________63ecb4842560088460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610e1d57600080fd5b7f23e2f15b66feab75c1e6aee1f874ef01b346636c780216c8ed4d327be495ac8481565b600a81565b600554600160a060020a031690565b7f9701a3e1840f59635c219124a5166d8eb2dfd539967f3c80e19f75e48f7df1fc81565b60005433600160a060020a03908116911614610f1c57600080fd5b73__Lib___________________________________63199ef7be60088760405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610f7257600080fd5b5af41515610f7f57600080fd5b505050604051805115156001149050610f9757600080fd5b600160a060020a0384161515610fac57600080fd5b82151580610fb957508115155b1515610fc457600080fd5b801515610fd057600080fd5b6000858152600e60205260409081902060018101805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a038816908117909155600282018690556003820185905560049091018390558491879060008051602061134b8339815191529042905190815260200160405180910390a481600160a060020a0385168660008051602061134b8339815191524260405190815260200160405180910390a480600160a060020a0385168660008051602061134b8339815191524260405190815260200160405180910390a45050505050565b600654600160a060020a031690565b7fd2034e198b9eadf8e1cbe0748ea895a9b61c191942d760814bbf69b40433b55c81565b600754600160a060020a031690565b600073__Lib___________________________________63085db8ab60088460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610e1d57600080fd5b7f5dfb70a859b83dcaee084a4338268940533335bc927474a5b53609d68502509481565b6276a70081565b60c881565b600054600154600254600354600454600554600654600754600160a060020a0397881698968816979586169694861695938416949284169391821692911690565b600381565b600054600160a060020a031690565b60006111d384610dc5565b1515600114801561120057506000848152600e6020526040902060010154600160a060020a038481169116145b801561121b57506000848152600e6020526040812060020154115b801561123957506000848152600e6020526040902060020154829010155b949350505050565b600073__Lib___________________________________634261493660088460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610e1d57600080fd5b600254600160a060020a031690565b6301312d0081565b6298968081565b61a8bf1981565b60006112c984610dc5565b151560011480156112f657506000848152600e6020526040902060010154600160a060020a038481169116145b801561131157506000848152600e6020526040812060030154115b80156112395750506000928352600e6020526040909220600301549190911015919050565b600e81565b600154600160a060020a031690560022b9cf2aa27c9aa7ec2da608e58454277753cbc771404f2a6e40a0aeb86bafe6a165627a7a72305820e3a0620581e74e6cd24bb16424d34239cc254fe0c77ee2b765b74ba28c39d2f00029" 
+}

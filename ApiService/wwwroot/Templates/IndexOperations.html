@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Honest Insurance - API Documentation</title>
+    <link rel="icon" href="../Templates/HIC_Submark_1.png">
+    <link rel="stylesheet" type="text/css" href="../Templates/stylesheet.css">
+</head>
+<body>
+    <div align="center">
+        <h1>
+            <a href="https://www.honestinsurance.net" target="_blank">
+                <img src="../Templates/HIC_Logo_Horizontal_Reverse.png" title="The Honest Insurance Company" width="180" align="left" style="margin:20px 20px 20px 20px"> 
+            </a>
+            API Documentation
+            <a href="https://www.github.com/HonestInsurance" target="_blank">
+                <img src="../Templates/Github.png" title="Repository available on Github" width="55" align="right" style="margin:20px 30px 20px 20px"> 
+            </a>
+        </h1>
+    </div>
+    <br />
+    
+    <div class="operations">
+        
+        {2}
+
+        <h3>Clients Documentation</h3>
+        <ul style="margin: -10px 0px 0px 30px">
+            <li style="margin: 5px"><a href="http://docs.servicestack.net/clients-overview" target="_blank">Clients documentation</a></li>
+            <li style="margin: 5px"><a href="/types/metadata">Types Metadata</a></li>
+            <li style="margin: 5px"><a href="/postman">Postman Metadata</a></li>
+        </ul>
+        
+        <h3>Clients Type Definitions (DTOs)</h3>
+        <ul style="margin: -10px 0px 0px 30px">
+            <li style="margin: 5px"><a href="/types/csharp">Csharp</a></li>
+            <li style="margin: 5px"><a href="/types/fsharp">Fsharp</a></li>
+            <li style="margin: 5px"><a href="/types/vbnet">Vb Net</a></li>
+            <li style="margin: 5px"><a href="/types/typescript">Type Script</a></li>
+            <li style="margin: 5px"><a href="/types/typescript.d">Type Script Definition</a></li>
+            <li style="margin: 5px"><a href="/types/java">Java</a></li>
+            <li style="margin: 5px"><a href="/types/kotlin">Kotlin</a></li>
+            <li style="margin: 5px"><a href="/types/swift">Swift</a></li>
+        </ul> 
+        
+        {3}
+        
+        {4}
+        
+        <!-- {5} -->
+        
+        {6}
+        
+    </div>
+    
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <h1>
+        <a href="https://servicestack.net" target="_blank" title="ServiceStack">ServiceStack</a>
+        .Net Core version: 
+        <a href="https://www.nuget.org/packages/ServiceStack.Core" target="_blank" title="Nuget">{7}</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+        .Net Core version: 
+        <a href="https://github.com/dotnet/core" target="_blank" title="GitHub">2.0.6</a>
+    </h1>
+
+    <script type="text/javascript">
+        if (document.querySelectorAll) {
+            var table = document.querySelectorAll("table")[0];
+            if (table) {
+                var cols = table.querySelectorAll("tr:first-child td").length + 1; //th
+                var isIE9 = document.documentMode <= 9;
+                var html = '<div><input type="text" placeholder="filter" /></div>';
+                if (!isIE9) {
+                    table.insertAdjacentHTML("afterbegin",
+                        '<thead id="filter"><tr><td colspan="' + cols + '">' + html + '</td></tr></thead>');
+                } else {
+                    var thead = document.createElement('thead');
+                    var tr = document.createElement("tr");
+                    var td = document.createElement("td");
+                    thead.id = "filter";
+                    td.innerHTML = html;
+                    td.setAttribute("colspan", cols);
+                    tr.appendChild(td);
+                    thead.appendChild(tr);
+                    table.insertBefore(thead, table.firstChild);
+                }
+                var input = document.querySelectorAll("#filter input")[0];
+                if (input) {
+                    input.onkeyup = function () {
+                        var rows = document.querySelectorAll("tbody tr");
+                        for (var i = 0; i < rows.length; i++) {
+                            rows[i].style.display = rows[i].firstChild.innerHTML.toLowerCase()
+                                    .indexOf(input.value.toLowerCase()) >= 0
+                                ? 'block'
+                                : 'none';
+                        }
+                    };
+                }
+            }
+        }
+    </script>
+</body>
+</html>

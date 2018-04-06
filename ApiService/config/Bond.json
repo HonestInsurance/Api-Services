@@ -1,0 +1,998 @@
+{
+  "contractName": "Bond",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MIN_BOND_PRINCIPAL_CU",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MIN_YIELD_PPB",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_NAME",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "DURATION_BOND_LOCK_NEXT_STATE_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MIN_DURATION_POLICY_PAUSED_DAY",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_DURATION_POLICY_PAUSED_DAY",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_DAILY_PROCESSING_OFFSET_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_DURATION_POLICY_LAPSED_DAY",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_YIELD_PPB",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "YAC_INTERVAL_DURATION_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_trustAdr",
+          "type": "address"
+        },
+        {
+          "name": "_poolAdr",
+          "type": "address"
+        },
+        {
+          "name": "_bondAdr",
+          "type": "address"
+        },
+        {
+          "name": "_bankAdr",
+          "type": "address"
+        },
+        {
+          "name": "_policyAdr",
+          "type": "address"
+        },
+        {
+          "name": "_settlementAdr",
+          "type": "address"
+        },
+        {
+          "name": "_adjustorAdr",
+          "type": "address"
+        },
+        {
+          "name": "_timerAdr",
+          "type": "address"
+        }
+      ],
+      "name": "setContractAdr",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getBankAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "dataStorage",
+      "outputs": [
+        {
+          "name": "idx",
+          "type": "uint256"
+        },
+        {
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "name": "paymentAccountHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "principal_Cu",
+          "type": "uint256"
+        },
+        {
+          "name": "yield_Ppb",
+          "type": "uint256"
+        },
+        {
+          "name": "maturityPayoutAmount_Cu",
+          "type": "uint256"
+        },
+        {
+          "name": "creationDate",
+          "type": "uint256"
+        },
+        {
+          "name": "nextStateExpiryDate",
+          "type": "uint256"
+        },
+        {
+          "name": "maturityDate",
+          "type": "uint256"
+        },
+        {
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "name": "securityReferenceHash",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_DURATION_POLICY_RECONCILIATION_DAYS",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "FUNDING_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "hashMap",
+      "outputs": [
+        {
+          "name": "firstIdx",
+          "type": "uint256"
+        },
+        {
+          "name": "nextIdx",
+          "type": "uint256"
+        },
+        {
+          "name": "count",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isActive",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_POLICY_CREDIT_CU",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getPolicyAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_OPERATOR_FEE_PPT",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isValid",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "BOND_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "TRUST_FEE_PPT",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getSettlementAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "PREMIUM_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getAdjustorAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "TRUST_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "bondMaturityPayoutAmount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTimerAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_DAYLIGHT_SAVING_ADJUSTMENT_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_idx",
+          "type": "uint256"
+        }
+      ],
+      "name": "get",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "OPERATOR_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MIN_POLICY_CREDIT_CU",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "WC_POOL_TARGET_TIME_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "SETTLEMENT_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "BOND_REQUIRED_SECURITY_REFERENCE_PPT",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getContractAdr",
+      "outputs": [
+        {
+          "name": "trustContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "poolContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "bondContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "bankContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "policyContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "settlementContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "adjustorContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "timerContractAdr",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POLICY_RECONCILIATION_SAFETY_MARGIN",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTrustAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isArchived",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getBondAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "YAC_PER_INTERVAL_PPB",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAX_BOND_PRINCIPAL_CU",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "POOL_TIME_ZONE_OFFSET",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "DURATION_POLICY_POST_LAPSED_DAY",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "DURATION_TO_BOND_MATURITY_SEC",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ADJUSTOR_ACCOUNT_PAYMENT_HASH",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "DURATION_WC_EXPENSE_HISTORY_DAYS",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "YAC_EXPENSE_THRESHOLD_PPT",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getPoolAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_trustAdr",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "bondHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "info",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogBond",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_principal_Cu",
+          "type": "uint256"
+        },
+        {
+          "name": "_hashOfReferenceBond",
+          "type": "bytes32"
+        }
+      ],
+      "name": "createBond",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_paymentAccountHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "_paymentSubject",
+          "type": "bytes32"
+        },
+        {
+          "name": "_creditAmount_Cu",
+          "type": "uint256"
+        },
+        {
+          "name": "_currentPoolDay",
+          "type": "uint256"
+        }
+      ],
+      "name": "processAccountCredit",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        },
+        {
+          "name": "info",
+          "type": "bytes32"
+        },
+        {
+          "name": "bondHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "reduceWcTransit",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_beginDay",
+          "type": "uint256"
+        },
+        {
+          "name": "_endDay",
+          "type": "uint256"
+        }
+      ],
+      "name": "getBondMaturityPayouts",
+      "outputs": [
+        {
+          "name": "bondMaturityPayoutAmountNext3Days_Cu",
+          "type": "uint256"
+        },
+        {
+          "name": "bondMaturityPayoutFuturePerDay_Cu",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_subject",
+          "type": "uint8"
+        },
+        {
+          "name": "_message",
+          "type": "bytes32"
+        },
+        {
+          "name": "_scheduledDateTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "ping",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6060604052606060405190810160409081526001808352602083015260009082015260088151816003015560208201518160040155604082015181600501555050341561004b57600080fd5b60405160208061200d833981016040528080519150819050600160a060020a038116151561007857600080fd5b60008054600160a060020a03909216600160a060020a031990921691909117905550611f64806100a96000396000f30060606040526004361061026d5763ffffffff60e060020a60003504166283f8bd8114610272578063079a6f4e146102975780630c131757146102aa5780630c432f2d1461033457806313f915dc14610347578063284f90b11461035a5780632b76d8e61461036d5780632c1b96c914610380578063358327cb146103935780633ff8ba9f146103a65780634414693c146103b95780634aa79747146104045780634af88313146104335780634cdedfe2146104c757806351b87d5f146104da578063584b6410146104ed5780635c36901c146105245780635e1f9f7b14610297578063609e9ad71461054e578063648596e91461059b5780636775d09b146105ae5780636a938567146105c15780636da57da1146105d75780636e2bdb95146105ea57806375c3357b146105fd578063799f14a2146106105780637be4af941461064157806383a46bd71461065457806384ba11ad1461066757806386f939f01461067a5780638cc3e2fe146106935780638d9791a9146106a95780638e244ef2146103a65780639507d39a146106bc5780639557cfa0146106d257806395e0b2931461027257806399e93aac146106e55780639c7b2b9b146106d2578063a2e2d5c8146106f8578063aa08eb241461070b578063abf290b514610773578063ad910d8514610786578063b6b942e814610799578063ba06ae46146107af578063ba684e09146107c2578063c99b168c146107d5578063cc1588e9146107e8578063d3046cec14610807578063d4dcd43714610347578063de3e0c0e146106e5578063dfc6e284146106d2578063e72964ba1461081a578063f756e9f8146104c7578063f83e94a61461082d575b600080fd5b341561027d57600080fd5b610285610840565b60405190815260200160405180910390f35b34156102a257600080fd5b610285610846565b34156102b557600080fd5b6102bd61084d565b60405160208082528190810183818151815260200191508051906020019080838360005b838110156102f95780820151838201526020016102e1565b50505050905090810190601f1680156103265780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b341561033f57600080fd5b610285610884565b341561035257600080fd5b61028561088b565b341561036557600080fd5b610285610890565b341561037857600080fd5b610285610895565b341561038b57600080fd5b61028561089a565b341561039e57600080fd5b61028561089f565b34156103b157600080fd5b6102856108a7565b34156103c457600080fd5b610402600160a060020a0360043581169060243581169060443581169060643581169060843581169060a43581169060c43581169060e435166108ad565b005b341561040f57600080fd5b610417610a0b565b604051600160a060020a03909116815260200160405180910390f35b341561043e57600080fd5b610449600435610a1a565b6040518b8152600160a060020a038b166020820152604081018a9052606081018990526080810188905260a0810187905260c0810186905260e08101859052610100810184905261012081018360078111156104a157fe5b60ff16815260208101929092525060409081019a50985050505050505050505180910390f35b34156104d257600080fd5b610285610a80565b34156104e557600080fd5b610285610a85565b34156104f857600080fd5b610500610aa9565b60405180848152602001838152602001828152602001935050505060405180910390f35b341561052f57600080fd5b61053a600435610ab5565b604051901515815260200160405180910390f35b341561055957600080fd5b61056d600435602435604435606435610b29565b6040519315158452602084019290925260408084019190915290151560608301526080909101905180910390f35b34156105a657600080fd5b6104176111dd565b34156105b957600080fd5b6102856111ec565b34156105cc57600080fd5b61053a6004356111f1565b34156105e257600080fd5b610285611249565b34156105f557600080fd5b61028561126d565b341561060857600080fd5b610417611272565b341561061b57600080fd5b610629600435602435611281565b60405191825260208201526040908101905180910390f35b341561064c57600080fd5b6102856112eb565b341561065f57600080fd5b61041761130f565b341561067257600080fd5b61028561131e565b341561068557600080fd5b610402600435602435611342565b341561069e57600080fd5b610285600435611884565b34156106b457600080fd5b610417611896565b34156106c757600080fd5b6102856004356118a5565b34156106dd57600080fd5b6102856118fd565b34156106f057600080fd5b610285611921565b341561070357600080fd5b610285611928565b341561071657600080fd5b61071e61192d565b604051600160a060020a039889168152968816602088015294871660408088019190915293871660608701529186166080860152851660a0850152841660c0840152921660e082015261010001905180910390f35b341561077e57600080fd5b61028561196e565b341561079157600080fd5b610417611973565b34156107a457600080fd5b61053a600435611982565b34156107ba57600080fd5b6104176119da565b34156107cd57600080fd5b6102856119e9565b34156107e057600080fd5b6102856119f1565b34156107f357600080fd5b61028560ff600435166024356044356119f8565b341561081257600080fd5b610285611a3c565b341561082557600080fd5b610285611a43565b341561083857600080fd5b610417611a48565b61271081565b624c4b4081565b60408051908101604052600c81527f48494320506f6f6c202320310000000000000000000000000000000000000000602082015281565b6202a30081565b600181565b600281565b600081565b600581565b631dcd650081565b610e1081565b60005433600160a060020a039081169116146108c857600080fd5b600160a060020a03881615156108dd57600080fd5b600160a060020a03871615156108f257600080fd5b600160a060020a038616151561090757600080fd5b600160a060020a038516151561091c57600080fd5b600160a060020a038416151561093157600080fd5b600160a060020a038316151561094657600080fd5b600160a060020a038216151561095b57600080fd5b600160a060020a038116151561097057600080fd5b6000805473ffffffffffffffffffffffffffffffffffffffff19908116600160a060020a039a8b1617909155600180548216988a1698909817909755600280548816968916969096179095556003805487169488169490941790935560048054861692871692909217909155600580548516918616919091179055600680548416918516919091179055600780549092169216919091179055565b600354600160a060020a031690565b600e60205260009081526040902080546001820154600283015460038401546004850154600586015460068701546007880154600889015460098a0154600a909a01549899600160a060020a0390981698969795969495939492939192909160ff16908b565b606481565b7f523009c7e41b6b3159012103fccff17371fb03621a0873eaff2f3d87cdb5fe3681565b600b54600c54600d5483565b600073__Lib___________________________________63199ef7be60088460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610b0d57600080fd5b5af41515610b1a57600080fd5b50505060405180519392505050565b600080548190819081908190819033600160a060020a0390811691161480610b5f575060015433600160a060020a039081169116145b80610b78575060025433600160a060020a039081169116145b80610b91575060035433600160a060020a039081169116145b80610baa575060045433600160a060020a039081169116145b80610bc3575060055433600160a060020a039081169116145b80610bdc575060065433600160a060020a039081169116145b80610bf5575060075433600160a060020a039081169116145b1515610c0057600080fd5b6000898152600e6020526040902060010154600160a060020a031615610c2857889350610c5a565b600095507f5061796d656e745375626a65637400000000000000000000000000000000000094508593508392506111d0565b6000848152600e602052604081206009015460ff166007811115610c7a57fe5b14158015610ca8575060036000858152600e602052604090206009015460ff166007811115610ca557fe5b14155b15610d5a576000848152600e6020526040902060018101546009909101547f426f6e645374617465000000000000000000000000000000000000000000000091600160a060020a0316908690600080516020611f1983398151915290429060ff166007811115610d1457fe5b60405191825260208201526040908101905180910390a4600095507f426f6e645374617465000000000000000000000000000000000000000000000094508592506111d0565b6000848152600e602052604090206007015442901015610e21576000848152600e6020526040902060018101546009909101547f457870697279446174650000000000000000000000000000000000000000000091600160a060020a0316908690600080516020611f1983398151915290429060ff166007811115610ddb57fe5b60405191825260208201526040908101905180910390a4600095507f457870697279446174650000000000000000000000000000000000000000000094508592506111d0565b6000848152600e60205260409020600301548814610ee6576000848152600e6020526040902060018101546009909101547f437265646974416d6f756e74000000000000000000000000000000000000000091600160a060020a0316908690600080516020611f1983398151915290429060ff166007811115610ea057fe5b60405191825260208201526040908101905180910390a4600095507f437265646974416d6f756e74000000000000000000000000000000000000000094508592506111d0565b6000848152600e602052604081206009015460ff166007811115610f0657fe5b141561105a576000848152600e6020526040812060098101805460ff1916600190811791829055909101549194508991600160a060020a0316908690600080516020611f1983398151915290429060ff166007811115610f6257fe5b60405191825260208201526040908101905180910390a4610f81611a48565b600160a060020a031663d63d3600898a60405160e060020a63ffffffff851602815260048101929092526024820152604401602060405180830381600087803b1515610fcc57600080fd5b5af11515610fd957600080fd5b50505060405180516000868152600e602052604090206004810182905560098101805460ff191660031790819055600190910154919250600160a060020a03909116908690600080516020611f1983398151915290429060ff16600781111561103e57fe5b60405191825260208201526040908101905180910390a46110f6565b6000848152600e6020526040808220600a908101548084529183209081019290925560098201805460ff19166004179081905560088301546001938401549396509194509091600160a060020a0316908490600080516020611f1983398151915290429060ff1660078111156110cc57fe5b60405191825260208201526040908101905180910390a46000848152600e60205260408120600a01555b506000838152600e6020908152604080832060078101849055600281018d905560098101805460ff191660049081179091558101546003820154633b9aca0091810291909104016005909101819055605a8a01808552600f9093529220805490920190915561116484611a57565b6000848152600e60205260409020600881015460018201546009909201549091600160a060020a0316908690600080516020611f1983398151915290429060ff1660078111156111b057fe5b60405191825260208201526040908101905180910390a460019550600094505b5050945094509450949050565b600454600160a060020a031690565b603281565b600073__Lib___________________________________63ecb4842560088460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610b0d57600080fd5b7f23e2f15b66feab75c1e6aee1f874ef01b346636c780216c8ed4d327be495ac8481565b600a81565b600554600160a060020a031690565b600080835b8381116112a9576000818152600f60205260409020549190910190600101611286565b600285016000908152600f60205260408082205460018801835281832054888452919092205401019250848403828115156112e057fe5b049150509250929050565b7f9701a3e1840f59635c219124a5166d8eb2dfd539967f3c80e19f75e48f7df1fc81565b600654600160a060020a031690565b7fd2034e198b9eadf8e1cbe0748ea895a9b61c191942d760814bbf69b40433b55c81565b600033803b801561135257600080fd5b61271085101561136157600080fd5b6298968085111561137157600080fd5b611379611a48565b600160a060020a0316638cbc1ca06040518163ffffffff1660e060020a028152600401602060405180830381600087803b15156113b557600080fd5b5af115156113c257600080fd5b505050604051805186111590506113d857600080fd5b831561147c576000848152600e602052604090206001015433600160a060020a0390811691161461140857600080fd5b60046000858152600e602052604090206009015460ff16600781111561142a57fe5b1461143457600080fd5b6000848152600e6020526040902060080154426202a30001901161145757600080fd5b6000848152600e60205260409020600301546103e860c8870204111561147c57600080fd5b600c5430336040519283526c01000000000000000000000000600160a060020a03928316810260208501529116026034820152604801604051809103902092506101606040519081016040908152600c548252600160a060020a03331660208301526000908201819052606082018790526080820181905260a082018190524260c083018190526202a3000160e08301526101008201819052610120820190815260006020918201819052858152600e9091526040902081518155602082015160018201805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a039290921691909117905560408201516002820155606082015181600301556080820151816004015560a0820151816005015560c0820151816006015560e08201518160070155610100820151816008015561012082015160098201805460ff191660018360078111156115d057fe5b0217905550610140820151600a909101555073__Lib___________________________________63ec72608960088560405160e060020a63ffffffff85160281526004810192909252602482015260440160006040518083038186803b151561163857600080fd5b5af4151561164557600080fd5b50505061165183611a57565b6000838152600e60205260409020600901548590600160a060020a033316908590600080516020611f1983398151915290429060ff16600781111561169257fe5b60405191825260208201526040908101905180910390a4831561187d576000848152600e60205260408082206009808201805460ff1990811660051782558886529385209182018054909416600217909355600a808301889055018790559186905260019091015490548491600160a060020a0316908690600080516020611f1983398151915290429060ff16600781111561172a57fe5b60405191825260208201526040908101905180910390a46000838152600e6020526040902060018101546009909101548591600160a060020a0316908590600080516020611f1983398151915290429060ff16600781111561178857fe5b60405191825260208201526040908101905180910390a46117a7611a48565b600160a060020a031663d63d360086600060405160e060020a63ffffffff851602815260048101929092526024820152604401602060405180830381600087803b15156117f357600080fd5b5af1151561180057600080fd5b50505060405180516000858152600e602052604090206004810182905560098101805460ff191660031790819055600190910154919250600160a060020a03909116908590600080516020611f1983398151915290429060ff16600781111561186557fe5b60405191825260208201526040908101905180910390a45b5050505050565b600f6020526000908152604090205481565b600754600160a060020a031690565b600073__Lib___________________________________63085db8ab60088460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610b0d57600080fd5b7f5dfb70a859b83dcaee084a4338268940533335bc927474a5b53609d68502509481565b6276a70081565b60c881565b600054600154600254600354600454600554600654600754600160a060020a0397881698968816979586169694861695938416949284169391821692911690565b600381565b600054600160a060020a031690565b600073__Lib___________________________________634261493660088460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b1515610b0d57600080fd5b600254600160a060020a031690565b6301312d0081565b6298968081565b60075460009033600160a060020a03908116911614611a1657600080fd5b60ff84161515611a3157611a2a8383611b67565b9050611a35565b5060005b9392505050565b61a8bf1981565b600e81565b600154600160a060020a031690565b611a5f611a48565b600160a060020a031663de3e0c0e6040518163ffffffff1660e060020a028152600401602060405180830381600087803b1515611a9b57600080fd5b5af11515611aa857600080fd5b50505060405180516000838152600e60205260409020600a429290920191820690910360089091015550611ada611896565b6000828152600e6020526040812060080154600160a060020a039290921691632944ac2e91843060405160e060020a63ffffffff8716028152600481019490945260ff90921660248401526044830152600160a060020a03166064820152608401600060405180830381600087803b1515611b5457600080fd5b5af11515611b6157600080fd5b50505050565b6000828152600e60205260408120600801548190819081908190861080611bad575060076000888152600e602052604090206009015460ff166007811115611bab57fe5b145b80611bd7575060066000888152600e602052604090206009015460ff166007811115611bd557fe5b145b15611be55760009450611f0e565b6000878152600e60205260409020600581015460099091015490945060039060ff166007811115611c1257fe5b14611c1e576000611c31565b6000878152600e60205260409020600301545b92506000915060056000888152600e602052604090206009015460ff166007811115611c5957fe5b1415611c8757506000868152600e6020526040808220600a01548083529120600301546103e89060c8020491505b6000878152600e6020526040812083860360059091018190551115611d5957611cae610a0b565b6000888152600e602052604090819020600281810154600590920154600160a060020a03949094169363870b1cbe939192918c91908290518663ffffffff1660e060020a02815260040180866006811115611d0557fe5b60ff1681526020810195909552506040808501939093526060840191909152608083015260a090910191506000905180830381600087803b1515611d4857600080fd5b5af11515611d5557600080fd5b5050505b611d61611a48565b6000888152600e60205260409081902060050154600160a060020a03929092169163f4b07f2a9186905160e060020a63ffffffff851602815260048101929092526024820152604401600060405180830381600087803b1515611dc357600080fd5b5af11515611dd057600080fd5b5060049150611ddc9050565b6000888152600e602052604090206009015460ff166007811115611dfc57fe5b1415611e23576000878152600e60205260409020600901805460ff19166007179055611e40565b6000878152600e60205260409020600901805460ff191660061790555b6000878152600e60205260409020600581015460018201546009909201549091600160a060020a0316908990600080516020611f1983398151915290429060ff166007811115611e8c57fe5b60405191825260208201526040908101905180910390a473__Lib___________________________________63fa8ae1cb60088960405160e060020a63ffffffff85160281526004810192909252602482015260440160006040518083038186803b1515611ef957600080fd5b5af41515611f0657600080fd5b505050600094505b50505050929150505600c3e329471035a3d804085e6e164fb80c565248b4dc9ce8432cec08e40a655f4ca165627a7a72305820a7e75bbde1f142e78b06caac31e5c10cc87c433f52ae6a13c9c985e31c35a89b0029" 
+}

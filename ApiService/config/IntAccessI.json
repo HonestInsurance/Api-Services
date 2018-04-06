@@ -1,0 +1,213 @@
+{
+  "contractName": "IntAccessI",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "name": "_trustAdr",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_trustAdr",
+          "type": "address"
+        },
+        {
+          "name": "_poolAdr",
+          "type": "address"
+        },
+        {
+          "name": "_bondAdr",
+          "type": "address"
+        },
+        {
+          "name": "_bankAdr",
+          "type": "address"
+        },
+        {
+          "name": "_policyAdr",
+          "type": "address"
+        },
+        {
+          "name": "_settlementAdr",
+          "type": "address"
+        },
+        {
+          "name": "_adjustorAdr",
+          "type": "address"
+        },
+        {
+          "name": "_timerAdr",
+          "type": "address"
+        }
+      ],
+      "name": "setContractAdr",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getContractAdr",
+      "outputs": [
+        {
+          "name": "trustContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "poolContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "bondContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "bankContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "policyContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "settlementContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "adjustorContractAdr",
+          "type": "address"
+        },
+        {
+          "name": "timerContractAdr",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTrustAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getPoolAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getBondAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getBankAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getPolicyAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getSettlementAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getAdjustorAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTimerAdr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b6040516020806104bc83398101604052808051915050600160a060020a038116151561003a57600080fd5b60008054600160a060020a03909216600160a060020a03199092169190911790556104528061006a6000396000f3006060604052600436106100a35763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416634414693c81146100a85780634aa79747146100f3578063648596e91461012257806375c3357b1461013557806383a46bd7146101485780638d9791a91461015b578063aa08eb241461016e578063ad910d85146101d6578063ba06ae46146101e9578063f83e94a6146101fc575b600080fd5b34156100b357600080fd5b6100f1600160a060020a0360043581169060243581169060443581169060643581169060843581169060a43581169060c43581169060e4351661020f565b005b34156100fe57600080fd5b61010661036d565b604051600160a060020a03909116815260200160405180910390f35b341561012d57600080fd5b61010661037c565b341561014057600080fd5b61010661038b565b341561015357600080fd5b61010661039a565b341561016657600080fd5b6101066103a9565b341561017957600080fd5b6101816103b8565b604051600160a060020a039889168152968816602088015294871660408088019190915293871660608701529186166080860152851660a0850152841660c0840152921660e082015261010001905180910390f35b34156101e157600080fd5b6101066103f9565b34156101f457600080fd5b610106610408565b341561020757600080fd5b610106610417565b60005433600160a060020a0390811691161461022a57600080fd5b600160a060020a038816151561023f57600080fd5b600160a060020a038716151561025457600080fd5b600160a060020a038616151561026957600080fd5b600160a060020a038516151561027e57600080fd5b600160a060020a038416151561029357600080fd5b600160a060020a03831615156102a857600080fd5b600160a060020a03821615156102bd57600080fd5b600160a060020a03811615156102d257600080fd5b6000805473ffffffffffffffffffffffffffffffffffffffff19908116600160a060020a039a8b1617909155600180548216988a1698909817909755600280548816968916969096179095556003805487169488169490941790935560048054861692871692909217909155600580548516918616919091179055600680548416918516919091179055600780549092169216919091179055565b600354600160a060020a031690565b600454600160a060020a031690565b600554600160a060020a031690565b600654600160a060020a031690565b600754600160a060020a031690565b600054600154600254600354600454600554600654600754600160a060020a0397881698968816979586169694861695938416949284169391821692911690565b600054600160a060020a031690565b600254600160a060020a031690565b600154600160a060020a0316905600a165627a7a72305820a44b8ee566f7faedeefbdcdbce53e9f78f706575d5181d94b8203cfd81af160d0029" 
+}

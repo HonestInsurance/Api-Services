@@ -1,0 +1,33 @@
+{
+  "contractName": "NotificationI",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_subject",
+          "type": "uint8"
+        },
+        {
+          "name": "_message",
+          "type": "bytes32"
+        },
+        {
+          "name": "_scheduledDateTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "ping",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x" 
+}

@@ -1,0 +1,17 @@
+{
+    "Ubuntu_Production": "http://eth.honestinsurance.net:8545/",
+    "Ubuntu_Staging": "http://eth.honestinsurance.net:8545/",
+    "Ubuntu_Development": "http://172.19.8.5:8545/",
+
+    "macOS_Production": "http://localhost:8545/",
+    "macOS_Staging": "http://localhost:8545/",
+    "macOS_Development": "http://localhost:8545/",
+    
+    "Production": "http://localhost:8545/",
+    "Staging": "http://localhost:8545/",
+    "Development": "http://localhost:8545/",
+
+    "MaxWaitDurationForTransactionReceipt": 60,
+    "DefaultNumberEntriesForLazyLoading": 20,
+    "DefaultBlockRangeForEventLogLoading" : 10000
+}

@@ -1,0 +1,188 @@
+@font-face {
+    font-family: openSans;
+    src: url("../Fonts/OpenSans-Regular.ttf");
+}
+@font-face {
+    font-family: josefinSlab;
+    src: url("../Fonts/JosefinSlab-Regular.ttf");
+}
+body  {
+    background-color:#fffdf9;
+    color:#564333;
+    /* font-family: "Helvetica Neue", Helvetica, Verdana, Arial; */
+    font-family: openSans;
+    margin: 0;
+    font-size: 13px;
+}
+.icons {
+    display: block;
+    float: right;
+}
+.auth {
+    display: block;
+    width: 17px;
+    height: 17px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAIAAAC0D9CtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAADsSURBVDhPY/hPOsCr58Pi/w9s/t/k+X9P5//zjP+/X0OEcet5lvL/BgMKui3z/+d9oAwOPR9Xo6h+VfP/cQCI8dABKIlDD0QFBN0zAIn8eg7l/riNQ88dBYSeGyz/37T/f5YA5X5cjUMP0OkIPajo22lsel4UoKuDo1si//9+x9AD1IBHDzBs0MMAogEt0CDopsD/j8shqpD0IDSwIJS+bgbF7LfTQCdBlSH0oGl4VQ9CMIPRAFgPsgZgSgEGK17AgK4BmMAIAbCj33RDnUTIBggA2wPxLtCSr4ehwngB2D/A1ApEsKROAPz/DwCLE/At7aBI3gAAAABJRU5ErkJggg==);             
+}
+.footer {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #19563d;
+    color: fffdf9;
+    text-align: left;
+    padding: 0 0 0 0px;
+}
+h1 {
+    color: #fffdf9;
+    font-family: josefinSlab;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0 0 0 15px;
+    line-height: 90px;
+    min-height: 90px;
+    border-radius: 0px;
+    border-bottom: 1px solid #19563d;
+    background: #19563d; /* Old browsers */
+}
+h2 {
+    margin: 25px 0 20px 0;
+    color: #564333;
+    font-size: 24px;
+}
+h3 {
+    color: #564333;
+    font-size: 18px;
+}
+a {
+    color: #ffca04;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover, a:focus {
+    color: #ffc904a1;
+    text-decoration: underline;
+}
+ul {
+    margin: 10px 0 0 10px;
+    padding: 0 0 0 10px;
+}
+li {
+    clear: left;
+    margin-top: 10px;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 0 20px 0;
+}
+table, tr, th, td {
+    border: none;
+}
+.operations, .operation {
+    padding: 0 0 0 40px;
+}
+/* All Operations */
+.operations table {
+    margin-left: 1.5em;
+}
+.operations th {
+    text-align: left;
+    font-weight: normal;
+    line-height: 18px;
+    min-width: 27em;
+    white-space: nowrap;
+}
+/* Single Operation */
+.operations td {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: bold;
+    color: #564333;
+    padding-left: 1.5em;
+    vertical-align: top;
+}
+.operation caption {
+    text-align: left;
+    font-size: 14px;
+    padding: 10px 0;
+    white-space: nowrap;
+}
+.operation tbody th {
+    text-align: left;
+}
+.operation thead th {
+    text-align: left;
+    text-transform: uppercase;
+}
+.operation th, .operation td {
+    padding: 5px 15px;
+    vertical-align: top;
+}
+.operation h4 {
+    margin: 10px 0;
+    padding: 0;
+}
+.operation li {
+    margin: 0;
+}
+.example {
+    padding-left: 15px;
+}
+.example h3 { 
+    color:#564333;
+    margin: 10px 0 0 -15px;
+}
+.example pre {
+    background-color: #ffc9042c;
+    border: 1px solid #ffca04;
+    font-family: Courier New;
+    font-size: 15px;
+    padding: 5px;
+    margin-right: 15px;
+    white-space: pre-wrap;
+    overflow:auto;
+}
+.example .value {
+    color: #193556;
+}    
+.call-info {
+    margin: 0 0 20px 0;
+}
+#desc{
+    margin: 0;
+    padding: 0 0 15px 15px;
+    font-size: 16px;
+}
+#desc P {
+    margin: 5px 0;
+    padding: 0;
+    line-height: 20px;
+    color: #564333;
+}
+table {
+    min-width: 430px;
+}
+#filter td {
+    text-align: right;
+}
+#filter div {
+    margin: -35px 0 0 0;
+}
+.error-popup {
+    position: absolute;
+    top: 48px;
+    text-align: center;
+    background: #ffb496;
+    width: 100%;
+    line-height: 40px;
+    color: #fffdf9;
+}
+.error-popup a {
+    font-weight: normal;
+    color: #fffdf9;
+    font-size: 18px;
+    display: block;
+}
