@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\ApiService.ServiceModel\ApiService.ServiceModel.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ServiceStack.Core" Version="5.0.2" />
+    <PackageReference Include="Nethereum.Web3" Version="2.4.0" />
+    <PackageReference Include="Nethereum.RPC" Version="2.4.0" />
+    <PackageReference Include="Nethereum.KeyStore" Version="2.4.0" />
+    <PackageReference Include="Nethereum.ABI" Version="2.4.0" />
+    <PackageReference Include="Nethereum.Hex" Version="2.4.0" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+</Project>

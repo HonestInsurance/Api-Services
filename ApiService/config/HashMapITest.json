@@ -1,0 +1,132 @@
+{
+  "contractName": "HashMapITest",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "hashMap",
+      "outputs": [
+        {
+          "name": "firstIdx",
+          "type": "uint256"
+        },
+        {
+          "name": "nextIdx",
+          "type": "uint256"
+        },
+        {
+          "name": "count",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isActive",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isValid",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_idx",
+          "type": "uint256"
+        }
+      ],
+      "name": "get",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isArchived",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "addHash",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "archiveHash",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6060604052606060405190810160409081526001808352602083015260009082018190528151816003015560208201518160040155604082015181600501555050341561004b57600080fd5b6103c08061005a6000396000f3006060604052600436106100695763ffffffff60e060020a60003504166343e08ad1811461006e578063584b6410146100865780635c36901c146100bd5780636a938567146100e75780639507d39a146100fd578063b3ac319d14610125578063b6b942e81461013b575b600080fd5b341561007957600080fd5b610084600435610151565b005b341561009157600080fd5b6100996101ba565b60405180848152602001838152602001828152602001935050505060405180910390f35b34156100c857600080fd5b6100d36004356101c6565b604051901515815260200160405180910390f35b34156100f257600080fd5b6100d3600435610239565b341561010857600080fd5b610113600435610290565b60405190815260200160405180910390f35b341561013057600080fd5b6100846004356102e7565b341561014657600080fd5b6100d360043561033d565b73__Lib___________________________________63ec72608960008360405160e060020a63ffffffff85160281526004810192909252602482015260440160006040518083038186803b15156101a757600080fd5b5af415156101b457600080fd5b50505050565b60035460045460055483565b600073__Lib___________________________________63199ef7be828460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b151561021d57600080fd5b5af4151561022a57600080fd5b50505060405180519392505050565b600073__Lib___________________________________63ecb48425828460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b151561021d57600080fd5b600073__Lib___________________________________63085db8ab828460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b151561021d57600080fd5b73__Lib___________________________________63fa8ae1cb60008360405160e060020a63ffffffff85160281526004810192909252602482015260440160006040518083038186803b15156101a757600080fd5b600073__Lib___________________________________6342614936828460405160e060020a63ffffffff85160281526004810192909252602482015260440160206040518083038186803b151561021d57600080fd00a165627a7a72305820d1d0542e3f95bf7015145e002495fd97839ef8a645ac474c0db105aba1c3a1e80029" 
+}
