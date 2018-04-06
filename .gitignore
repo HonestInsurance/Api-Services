@@ -1,6 +1,6 @@
 ApiService/bin/*
 ApiService/obj/*
-!ApiService/config/ServiceStackLicense.txt
+ApiService/config/ServiceStackLicense.txt
 ApiService.ServiceInterface/bin/*
 ApiService.ServiceInterface/obj/*
 ApiService.ServiceModel/bin/*
