@@ -1,6 +1,6 @@
 /**
  * @description Class to provide generic functionality and configuration settings that are initialized at the start of the service
- * @copyright (c) 2017 Honest Insurance
+ * @copyright (c) 2017 HIC Limited (NZBN: 9429043400973)
  * @author Martin Stellnberger
  * @license GPL-3.0
  */

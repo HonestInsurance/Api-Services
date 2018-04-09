@@ -1,3 +1,10 @@
+/*
+ * @description CSS to style the Metadata pages
+ * @copyright (c) 2017 HIC Limited (NZBN: 9429043400973)
+ * @author Martin Stellnberger
+ * @license GPL-3.0
+*/
+
 @font-face {
     font-family: openSans;
     src: url("../Fonts/OpenSans-Regular.ttf");
