@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="ServiceStack.Core" Version="5.0.2" />
+    <PackageReference Include="ServiceStack.Core" Version="5.1.0" />
     <PackageReference Include="Nethereum.Web3" Version="2.4.0" />
     <PackageReference Include="Nethereum.RPC" Version="2.4.0" />
   </ItemGroup>
