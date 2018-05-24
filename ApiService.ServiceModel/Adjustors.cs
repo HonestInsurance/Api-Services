@@ -80,12 +80,12 @@ namespace ApiService.ServiceModel
         }
     }
 
-    [Api("Creates an adjustor within the specified pool ecosystem")]
+    [Api("Creates an adjustor within the specified pool ecosystem. Only the trust can create an adjustor.")]
     [Route("/adjustor", "POST", Summary = "Creates a adjustor and returns the hash of the submitted transaction")]
     public class CreateAdjustor : IReturn<TransactionHash>, IPost {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be an authorised adjustor's private key)")]
+        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be a Trust key)")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = true, Description = "Address of the adjustor's owner")]
         public string Owner { get; set; }
@@ -113,12 +113,12 @@ namespace ApiService.ServiceModel
         }
     }
 
-    [Api("Updates an adjustor")]
+    [Api("Updates an adjustor. Only the trust can update an adjustor's details")]
     [Route("/adjustor", "PUT", Summary = "Updates a adjustor and returns the hash of the submitted transaction")]
     public class UpdateAdjustor : IReturn<TransactionHash>, IPut {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be an authorised adjustor's private key)")]
+        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be a Trust key)")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = false, Description = "The hash of the adjustor updating this adjustor (must match the signing key used)")]
         public string AdjustorHash { get; set; }
@@ -151,12 +151,12 @@ namespace ApiService.ServiceModel
         }
     }
 
-    [Api("Allows the adjustor holder to permanently retire this adjustor")]
-    [Route("/adjustor/retire", "PUT", Summary = "Retires this adjustor (can only be performed by the adjustor holder)")]
+    [Api("Permanently retires an adjustor. Only the trust can perform this transaction.")]
+    [Route("/adjustor/retire", "PUT", Summary = "Retires this adjustor")]
     public class RetireAdjustor : IReturn<TransactionHash>, IPut {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be an authorised adjustor's private key)")]
+        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be a Trust key)")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = false, Description = "The hash of the adjustor to be retired")]
         public string AdjustorHash { get; set; }

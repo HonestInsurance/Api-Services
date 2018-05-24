@@ -85,7 +85,7 @@ namespace ApiService.ServiceModel
     public class CreateSettlement : IReturn<TransactionHash>, IPost {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key of an adjustor sign the transaction with")]
+        [ApiMember(IsRequired = true, Description = "The private key of an adjustor signing the transaction")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = true, Description = "Hash of the adjustor creating this settlement")]
         public string AdjustorHash { get; set; }
@@ -119,7 +119,7 @@ namespace ApiService.ServiceModel
     public class AddSettlementInfo : IReturn<TransactionHash>, IPut {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key of an adjustor sign the transaction with")]
+        [ApiMember(IsRequired = true, Description = "The private key of an adjustor signing the transaction")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = false, Description = "Hash of the settlement to be updated")]
         public string SettlementHash { get; set; }
@@ -153,7 +153,7 @@ namespace ApiService.ServiceModel
     public class CloseSettlement : IReturn<TransactionHash>, IPut {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key of an adjustor sign the transaction with")]
+        [ApiMember(IsRequired = true, Description = "The private key of an adjustor signing the transaction")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = false, Description = "Hash of the settlement to be updated")]
         public string SettlementHash { get; set; }
@@ -189,7 +189,7 @@ namespace ApiService.ServiceModel
     public class SetExpectedSettlementAmount : IReturn<TransactionHash>, IPut {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key of an adjustor sign the transaction with")]
+        [ApiMember(IsRequired = true, Description = "The private key of an adjustor signing the transaction")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = false, Description = "Hash of the settlement to be updated")]
         public string SettlementHash { get; set; }

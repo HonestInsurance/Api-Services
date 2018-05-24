@@ -164,7 +164,7 @@ namespace ApiService.ServiceModel
     public class SuspendPolicy : IReturn<TransactionHash>, IPut {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be an authorised adjustor's private key)")]
+        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be the policy holders private key)")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = false, Description = "The hash of the policy to be suspended")]
         public string PolicyHash { get; set; }
@@ -188,7 +188,7 @@ namespace ApiService.ServiceModel
     public class UnsuspendPolicy : IReturn<TransactionHash>, IPut {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be an authorised adjustor's private key)")]
+        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be the policy holder's private key)")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = false, Description = "The hash of the policy to be unsuspended")]
         public string PolicyHash { get; set; }
@@ -212,7 +212,7 @@ namespace ApiService.ServiceModel
     public class RetirePolicy : IReturn<TransactionHash>, IPut {
         [ApiMember(IsRequired = true, Description = "The address of the any contract belonging to this ecosystem")]
         public string ContractAdr { get; set; }
-        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be an authorised adjustor's private key)")]
+        [ApiMember(IsRequired = true, Description = "The private key to sign the transaction with (must be the policy holder's private key)")]
         public string SigningPrivateKey { get; set; }
         [ApiMember(IsRequired = false, Description = "The hash of the policy to be retired")]
         public string PolicyHash { get; set; }
