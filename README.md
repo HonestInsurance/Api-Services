@@ -28,8 +28,8 @@ For testing purposes, the entire Postman api collection can be downloaded [here]
 ## Looking under the hood
 
 This solution is implemented C# and the following technology stacks are used in this solution:
-* .Net Core version [2.0.6](https://github.com/dotnet/core)
-* ServiceStack Core version [5.0.2](https://www.nuget.org/packages/ServiceStack.Core) (plus a valid license key)
+* ASP .Net Core version [2.0.8](https://www.nuget.org/packages/Microsoft.AspNetCore.All)
+* ServiceStack Core version [5.1.0](https://www.nuget.org/packages/ServiceStack.Core) (plus a valid license key)
 * Nethereum version [2.4.0](https://www.nuget.org/packages/Nethereum.Web3/)
 * Fluent validation (Newtonsoft.Json) version [11.0.2](https://www.nuget.org/packages/Newtonsoft.Json)
 
@@ -45,12 +45,13 @@ The solution is hosted on a Ubuntu Server with the following configuration:
 
 The links below can be used to connect to a private Blockchain and retrieve policy, settlement, bond, etc. related information deployed on a private Blockchain.
 * [List of all available APIs and documentation](https://api.honestinsurance.net)
-* [Status of the ecosystem](https://api.honestinsurance.net/ecosystem/status?ContractAdr=0xf25186b5081ff5ce73482ad761db0eb0d25abfbf)
-* [Log files of ecosystem](https://api.honestinsurance.net/ecosystem/logs?ContractAdr=0xf25186b5081ff5ce73482ad761db0eb0d25abfbf)
-* [List of all bonds](https://api.honestinsurance.net/bond/list?ContractAdr=0xf25186b5081ff5ce73482ad761db0eb0d25abfbf)
-* [Details of bond 1](https://api.honestinsurance.net/bond?ContractAdr=0xf25186b5081ff5ce73482ad761db0eb0d25abfbf&Idx=1)
-* [List of all policies](https://api.honestinsurance.net/policy/list?ContractAdr=0xf25186b5081ff5ce73482ad761db0eb0d25abfbf)
-* [Details of policy 1](https://api.honestinsurance.net/policy?ContractAdr=0xf25186b5081ff5ce73482ad761db0eb0d25abfbf&Idx=1)
+* [Server and ecosystem configuration info](https://api.honestinsurance.net/config)
+* [Status of the ecosystem](https://api.honestinsurance.net/ecosystem/status?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11)
+* [Log files of ecosystem](https://api.honestinsurance.net/ecosystem/logs?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11)
+* [List of all bonds](https://api.honestinsurance.net/bond/list?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11)
+* [Details of bond 1](https://api.honestinsurance.net/bond?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11&Idx=1)
+* [List of all policies](https://api.honestinsurance.net/policy/list?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11)
+* [Details of policy 1](https://api.honestinsurance.net/policy?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11&Idx=1)
 
 -----------------------
 
