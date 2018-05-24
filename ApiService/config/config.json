@@ -1,15 +1,15 @@
 {
     "Ubuntu_Production": "http://eth.honestinsurance.net:8545/",
-    "Ubuntu_Staging": "http://eth.honestinsurance.net:8545/",
-    "Ubuntu_Development": "http://172.19.8.5:8545/",
+    "Ubuntu_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
+    "Ubuntu_Development": "http://localhost:8545",
 
-    "macOS_Production": "http://localhost:8545/",
-    "macOS_Staging": "http://localhost:8545/",
+    "macOS_Production": "http://eth.honestinsurance.net:8545/",
+    "macOS_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
     "macOS_Development": "http://localhost:8545/",
     
-    "Production": "http://localhost:8545/",
-    "Staging": "http://localhost:8545/",
-    "Development": "http://localhost:8545/",
+    "Production": "http://eth.honestinsurance.net:8545/",
+    "Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
+    "Development": "http://localhost:8545",
 
     "MaxWaitDurationForTransactionReceipt": 60,
     "DefaultNumberEntriesForLazyLoading": 20,
