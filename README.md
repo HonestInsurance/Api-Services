@@ -20,17 +20,16 @@ These API services are deployed and available at this URL:
 * [https://api.honestinsurance.net](https://api.honestinsurance.net)
 
 Further more, a detailed description of all the available endpoints, their purpose and required parameters is also presented at this url.
-For testing purposes, the entire Postman api collection can be downloaded [here](https://github.com/HonestInsurance/Resources/blob/master/postman/HonestInsurance-API.postman_collection.json?raw=true) and the corresponding Postman environment configuration [here](https://github.com/HonestInsurance/Resources/blob/master/postman/HonestInsurance-API.postman_environment.json?raw=true).
-
+For testing purposes, the entire Postman api collection can be accessed [here](https://postman.honestinsurance.net).
 
 -----------------------
 
 ## Looking under the hood
 
 This solution is implemented C# and the following technology stacks are used in this solution:
-* ASP .Net Core version [2.0.8](https://www.nuget.org/packages/Microsoft.AspNetCore.All)
-* ServiceStack Core version [5.1.0](https://www.nuget.org/packages/ServiceStack.Core) (plus a valid license key)
-* Nethereum version [2.4.0](https://www.nuget.org/packages/Nethereum.Web3/)
+* ASP .Net Core version [2.1.0](https://www.nuget.org/packages/Microsoft.AspNetCore.All)
+* ServiceStack .Net Core version [5.1.0](https://www.nuget.org/packages/ServiceStack.Core) (plus a valid license key)
+* Nethereum Portable version [2.5.1](https://www.nuget.org/packages/Nethereum.Portable)
 * Fluent validation (Newtonsoft.Json) version [11.0.2](https://www.nuget.org/packages/Newtonsoft.Json)
 
 The solution is hosted on a Ubuntu Server with the following configuration:
@@ -43,7 +42,7 @@ The solution is hosted on a Ubuntu Server with the following configuration:
 
 ## A look at what's there
 
-The links below can be used to connect to a private Blockchain and retrieve policy, settlement, bond, etc. related information deployed on a private Blockchain.
+The links below can be used to connect to a public Blockchain and retrieve policy, settlement, bond, etc. related information deployed on the [Rinkeby](https://rinkeby.etherscan.io) testnet.
 * [List of all available APIs and documentation](https://api.honestinsurance.net)
 * [Server and ecosystem configuration info](https://api.honestinsurance.net/config)
 * [Status of the ecosystem](https://api.honestinsurance.net/ecosystem/status?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11)

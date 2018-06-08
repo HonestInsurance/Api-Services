@@ -1,7 +1,7 @@
 {
     "Ubuntu_Production": "http://eth.honestinsurance.net:8545/",
     "Ubuntu_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
-    "Ubuntu_Development": "http://localhost:8545",
+    "Ubuntu_Development": "http://13.70.147.208:8545",
 
     "macOS_Production": "http://eth.honestinsurance.net:8545/",
     "macOS_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
@@ -12,6 +12,6 @@
     "Development": "http://localhost:8545",
 
     "MaxWaitDurationForTransactionReceipt": 60,
-    "DefaultNumberEntriesForLazyLoading": 20,
-    "DefaultBlockRangeForEventLogLoading" : 10000
+    "DefaultNumberEntriesForLazyLoading": 100,
+    "DefaultBlockRangeForEventLogLoading" : 1000000
 }
