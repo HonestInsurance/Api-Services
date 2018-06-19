@@ -3,7 +3,7 @@
     "Ubuntu_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
     "Ubuntu_Development": "http://13.70.147.208:8545",
 
-    "macOS_Production": "http://eth.honestinsurance.net:8545/",
+    "macOS_Production": "http://localhost:8545/",
     "macOS_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
     "macOS_Development": "http://localhost:8545/",
     
@@ -11,7 +11,9 @@
     "Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
     "Development": "http://localhost:8545",
 
+    "DefaultGasPrice": 1000000000000,
+    "DefaultGasLimit": 4712388,
     "MaxWaitDurationForTransactionReceipt": 60,
     "DefaultNumberEntriesForLazyLoading": 100,
-    "DefaultBlockRangeForEventLogLoading" : 1000000
+    "DefaultBlockRangeForEventLogLoading": 1000000
 }
