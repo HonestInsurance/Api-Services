@@ -36,6 +36,8 @@ namespace ApiService.ServiceModel
         public static readonly ContractAbi TIMER;
         public static readonly ContractAbi TRUST;
         public static IHostingEnvironment hostingEnvironment;
+        public static ulong defaultGasPrice;
+        public static ulong defaultGasLimit;
         public static ulong maxWaitDurationForTransactionReceipt;
         public static ulong defaultNumberEntriesForLazyLoading;
         public static ulong defaultBlockRangeForEventLogLoading;
@@ -79,6 +81,12 @@ namespace ApiService.ServiceModel
                     WEB3_URL_ENDPOINT = json.Value<string>(env.EnvironmentName);
                 // In case the environment name is not configured set the url to localhost
                 else WEB3_URL_ENDPOINT = "http://localhost:8545/";
+
+                // Get the defaultGasPrice
+                defaultGasPrice = json.Value<ulong>("DefaultGasPrice");
+
+                // Get the defaultGasLimit
+                defaultGasLimit = json.Value<ulong>("DefaultGasLimit");
 
                 // Get the MaxWaitDurationForTransactionResult
                 maxWaitDurationForTransactionReceipt = json.Value<ulong>("MaxWaitDurationForTransactionReceipt");

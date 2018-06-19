@@ -75,24 +75,23 @@ namespace ApiService.ServiceInterface
         }
         
         // Creates, Signs and publishes a new transaction
-        public static TransactionHash createSignPublishTransaction(string abi, string address, 
-            string signingPrivateKey, string function, params object []inputParams)
+        public static TransactionHash createSignPublishTransaction(string abi, string contractAddress, 
+            string signingPrivateKey, string contractFunction, params object []inputParams)
         {
-            // Create the contract function instance
-            Function contractFunction = 
-                new Web3(new Account(signingPrivateKey), AppModelConfig.WEB3_URL_ENDPOINT).Eth.GetContract(abi, address).GetFunction(function);
+            // Sign the transaction offline first
+            string signedTransaction = new TransactionSigner().SignTransaction(
+                signingPrivateKey,                  // privateKey
+                contractAddress,                    // to
+                0,                                  // amount in wei to send with transaction
+                web3.Eth.Transactions.GetTransactionCount.SendRequestAsync(EthECKey.GetPublicAddress(signingPrivateKey)).Result,      // nonce value
+                AppModelConfig.defaultGasPrice,     // gasPrice
+                AppModelConfig.defaultGasLimit,     // gasLimit
+                web3.Eth.GetContract(abi, contractAddress).GetFunction(contractFunction).GetData(inputParams)       // data
+            );
 
-            // Create, Sign and publish transaction
-            // Nethereum.Core.Signing.Crypto.EthECKey.GetPublicAddress(privateKey)
+            // Publish the raw and signed transaction
             try {
-                return new TransactionHash {
-                    Hash = contractFunction.SendTransactionAsync(
-                        EthECKey.GetPublicAddress(signingPrivateKey), 
-                        new HexBigInteger(4712388), 
-                        null, 
-                        inputParams
-                        ).Result
-                };
+                return new TransactionHash { Hash = web3.Eth.Transactions.SendRawTransaction.SendRequestAsync(signedTransaction).Result };
             } catch {
                 // If the transaction was rejected by the blockchain return and throw an HTTP Error
                 throw new HttpError(
@@ -100,6 +99,32 @@ namespace ApiService.ServiceInterface
                     AppModelConfig.TransactionProcessingError,
                     AppModelConfig.TransactionProcessingErrorMessage);
             }
+
+            // ***************************************************************************************
+            // Alternative method of publishing transactions by not using offline transaction signing
+            //  => Disadvantage of this method is that every transaction creates a new web3 connection
+            // ***************************************************************************************
+
+            // Function contractFunction = 
+            //     new Web3(new Account(signingPrivateKey), AppModelConfig.WEB3_URL_ENDPOINT).Eth.GetContract(abi, address).GetFunction(function);
+
+            // // Create, Sign and publish transaction
+            // try {
+            //     return new TransactionHash {
+            //         Hash = contractFunction.SendTransactionAsync(
+            //             EthECKey.GetPublicAddress(signingPrivateKey), 
+            //             new HexBigInteger(4712388), 
+            //             null, 
+            //             inputParams
+            //             ).Result
+            //     };
+            // } catch {
+            //     // If the transaction was rejected by the blockchain return and throw an HTTP Error
+            //     throw new HttpError(
+            //         HttpStatusCode.NotAcceptable,
+            //         AppModelConfig.TransactionProcessingError,
+            //         AppModelConfig.TransactionProcessingErrorMessage);
+            // }
         }
 
         // Creates and deploys the specified contract to the Blockchain
@@ -109,12 +134,13 @@ namespace ApiService.ServiceInterface
             try {
                 return new TransactionHash {            
                     Hash = new Web3(new Account(signingPrivateKey), AppModelConfig.WEB3_URL_ENDPOINT).Eth.DeployContract.SendRequestAsync(
-                        abi, 
-                        linkedBinary,
-                        EthECKey.GetPublicAddress(signingPrivateKey),
-                        new HexBigInteger(4712388),             // This is the default block gas limit
-                        null, 
-                        inputParams).Result
+                        abi,                                                        // Contract ABI
+                        linkedBinary,                                               // Linked contract binary
+                        EthECKey.GetPublicAddress(signingPrivateKey),               // Public key of transaction signer key used
+                        new HexBigInteger(AppModelConfig.defaultGasLimit),          // Gas limit
+                        new HexBigInteger(AppModelConfig.defaultGasPrice),          // Gas price
+                        new HexBigInteger(0),                                       // Amount in wei sent with deployment
+                        inputParams).Result                                         // Deployment parameters
                 };
             } catch {
                 // If the transaction was rejected by the blockchain return and throw an HTTP Error
