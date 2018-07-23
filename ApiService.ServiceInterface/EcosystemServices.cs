@@ -267,6 +267,8 @@ namespace ApiService.ServiceInterface
             // Returns the configured hosting environment details
             return new HostingEnvironment {
                 ApiServiceHostingEnvironmentName = AppModelConfig.hostingEnvironment.EnvironmentName,
+                DefaultGasPrice = AppModelConfig.defaultGasPrice,
+                DefaultGasLimit = AppModelConfig.defaultGasLimit,
                 MaxWaitDurationForTransactionReceipt = AppModelConfig.maxWaitDurationForTransactionReceipt,
                 DefaultNumberEntriesForLazyLoading = AppModelConfig.defaultNumberEntriesForLazyLoading,
                 DefaultBlockRangeForEventLogLoading = AppModelConfig.defaultBlockRangeForEventLogLoading,

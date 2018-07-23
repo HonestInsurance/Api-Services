@@ -232,16 +232,24 @@ namespace ApiService.ServiceModel
     public class HostingEnvironment {
         [ApiMember(IsRequired = true, Description = "Name of the hostig environment this API service is running on")]
         public string ApiServiceHostingEnvironmentName { get; set; }
+        
+        [ApiMember(IsRequired = true, Description = "The default gas price to be used for new transactions to be published")]
+        public ulong DefaultGasPrice { get; set; }
+        [ApiMember(IsRequired = true, Description = "The default gas limit to be used for new transactions to be published")]
+        public ulong DefaultGasLimit { get; set; }
+        
         [ApiMember(IsRequired = true, Description = "The maximum duration the API service is awaitig a transaction receipt before timing out")]
         public ulong MaxWaitDurationForTransactionReceipt { get; set; }
         [ApiMember(IsRequired = true, Description = "Default number of list records returned required for lazy loading")]
         public ulong DefaultNumberEntriesForLazyLoading { get; set; }
         [ApiMember(IsRequired = true, Description = "Default range of Blockchain blocks that are search for retrieving log files required for lazy loading")]
         public ulong DefaultBlockRangeForEventLogLoading { get; set; }
+        
         [ApiMember(IsRequired = true, Description = "The endpoint address of the Blockchain client this API service is connected to")]
         public string Web3UrlEndpoint { get; set; }
         [ApiMember(IsRequired = true, Description = "Indicates if (and in what time intervall) the api service creates automatic ping transactions")]
         public ulong AutoSchedulePingDuration { get; set; }
+        
         [ApiMember(IsRequired = true, Description = "ABI of the External Access interface")]
         public string ExternalAccessInterfaceAbi { get; set; }
         [ApiMember(IsRequired = true, Description = "ABI of the Internal Access interface")]
