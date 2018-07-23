@@ -142,6 +142,15 @@ namespace ApiService.ServiceInterface
                         new HexBigInteger(0),                                       // Amount in wei sent with deployment
                         inputParams).Result                                         // Deployment parameters
                 };
+
+                // Hash = new Web3(new Account(signingPrivateKey), AppModelConfig.WEB3_URL_ENDPOINT).Eth.DeployContract.SendRequestAsync(
+                //     abi, 
+                //     linkedBinary,
+                //     EthECKey.GetPublicAddress(signingPrivateKey),
+                //     new HexBigInteger(4712388),             // This is the default block gas limit
+                //     null, 
+                //     inputParams).Result
+                
             } catch {
                 // If the transaction was rejected by the blockchain return and throw an HTTP Error
                 throw new HttpError(
