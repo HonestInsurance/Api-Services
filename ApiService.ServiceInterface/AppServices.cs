@@ -38,6 +38,11 @@ namespace ApiService.ServiceInterface
             web3 = new Nethereum.Web3.Web3(AppModelConfig.WEB3_URL_ENDPOINT);
         }
 
+        public static HexBigInteger getTransactionCount(string privateKey)
+        {
+            return web3.Eth.Transactions.GetTransactionCount.SendRequestAsync(EthECKey.GetPublicAddress(privateKey)).Result;
+        }
+
         public static Tuple<BlockParameter, BlockParameter> getBlockParameterConfiguration(ulong requestFromBlock, ulong requestToBlock, bool useDefaultSetting)
         {
             // Create from and to Block parameter for the request
@@ -92,17 +97,18 @@ namespace ApiService.ServiceInterface
             // Publish the raw and signed transaction
             try {
                 return new TransactionHash { Hash = web3.Eth.Transactions.SendRawTransaction.SendRequestAsync(signedTransaction).Result };
-            } catch {
+            } catch (Exception exc) {
                 // If the transaction was rejected by the blockchain return and throw an HTTP Error
                 throw new HttpError(
                     HttpStatusCode.NotAcceptable,
                     AppModelConfig.TransactionProcessingError,
-                    AppModelConfig.TransactionProcessingErrorMessage);
+                    AppModelConfig.TransactionProcessingErrorMessage + "   ---   " + exc.Message);
             }
 
             // ***************************************************************************************
             // Alternative method of publishing transactions by not using offline transaction signing
             //  => Disadvantage of this method is that every transaction creates a new web3 connection
+            //  => Advantage of this method is that multiple transactions can be published at the same time (no issues with nonce values)
             // ***************************************************************************************
 
             // Function contractFunction = 
@@ -151,12 +157,12 @@ namespace ApiService.ServiceInterface
                 //     null, 
                 //     inputParams).Result
                 
-            } catch {
+            } catch (Exception exc) {
                 // If the transaction was rejected by the blockchain return and throw an HTTP Error
                 throw new HttpError(
                     HttpStatusCode.NotAcceptable,
                     AppModelConfig.TransactionProcessingError,
-                    AppModelConfig.TransactionProcessingErrorMessage);
+                    AppModelConfig.TransactionProcessingErrorMessage + "   ---   " + exc.Message);
             }
         }
 
