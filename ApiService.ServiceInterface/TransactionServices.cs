@@ -74,7 +74,7 @@ namespace ApiService.ServiceInterface
                 AppModelConfig.LIB.bytecode, 
                 request.SigningPrivateKey, 
                 null);
-            TransactionResult libTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = libTransactionHash.Hash});
+            TransactionResult libTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = libTransactionHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
             
             // Deploy the trust contract and await until the transaction has been mined
             TransactionHash trustTransactionHash = AppServices.createSignDeployContract(
@@ -82,7 +82,7 @@ namespace ApiService.ServiceInterface
                 AppModelConfig.linkContractBytecode(AppModelConfig.TRUST.bytecode, "Lib", libTransResult.ContractAddress), 
                 request.SigningPrivateKey,
                 null);
-            TransactionResult trustTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = trustTransactionHash.Hash});
+            TransactionResult trustTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = trustTransactionHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
 
             // Deploy the pool contract
             TransactionHash poolTransactionHash = AppServices.createSignDeployContract(
@@ -90,7 +90,7 @@ namespace ApiService.ServiceInterface
                 AppModelConfig.linkContractBytecode(AppModelConfig.POOL.bytecode, "Lib", libTransResult.ContractAddress), 
                 request.SigningPrivateKey,
                 trustTransResult.ContractAddress);
-            TransactionResult poolTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = poolTransactionHash.Hash});
+            TransactionResult poolTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = poolTransactionHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
             
             // Deploy the bond contract
             TransactionHash bondTransactionHash = AppServices.createSignDeployContract(
@@ -98,7 +98,7 @@ namespace ApiService.ServiceInterface
                 AppModelConfig.linkContractBytecode(AppModelConfig.BOND.bytecode, "Lib", libTransResult.ContractAddress), 
                 request.SigningPrivateKey,
                 trustTransResult.ContractAddress);
-            TransactionResult bondTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = bondTransactionHash.Hash});
+            TransactionResult bondTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = bondTransactionHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
             
             // Deploy the bank contract
             TransactionHash bankTransactionHash = AppServices.createSignDeployContract(
@@ -106,7 +106,7 @@ namespace ApiService.ServiceInterface
                 AppModelConfig.linkContractBytecode(AppModelConfig.BANK.bytecode, "Lib", libTransResult.ContractAddress), 
                 request.SigningPrivateKey,
                 trustTransResult.ContractAddress);
-            TransactionResult bankTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = bankTransactionHash.Hash});
+            TransactionResult bankTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = bankTransactionHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
 
             // Deploy the policy contract
             TransactionHash policyTransactionHash = AppServices.createSignDeployContract(
@@ -114,7 +114,7 @@ namespace ApiService.ServiceInterface
                 AppModelConfig.linkContractBytecode(AppModelConfig.POLICY.bytecode, "Lib", libTransResult.ContractAddress), 
                 request.SigningPrivateKey,
                 trustTransResult.ContractAddress);
-            TransactionResult policyTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = policyTransactionHash.Hash});
+            TransactionResult policyTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = policyTransactionHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
             
             // Deploy the claim contract
             TransactionHash settlementTransactionHash = AppServices.createSignDeployContract(
@@ -122,7 +122,7 @@ namespace ApiService.ServiceInterface
                 AppModelConfig.linkContractBytecode(AppModelConfig.SETTLEMENT.bytecode, "Lib", libTransResult.ContractAddress), 
                 request.SigningPrivateKey,
                 trustTransResult.ContractAddress);
-            TransactionResult settlementTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = settlementTransactionHash.Hash});
+            TransactionResult settlementTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = settlementTransactionHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
             
             // Deploy the adjustor contract
             TransactionHash adjustorTransactionHash = AppServices.createSignDeployContract(
@@ -130,7 +130,7 @@ namespace ApiService.ServiceInterface
                 AppModelConfig.linkContractBytecode(AppModelConfig.ADJUSTOR.bytecode, "Lib", libTransResult.ContractAddress), 
                 request.SigningPrivateKey,
                 trustTransResult.ContractAddress);
-            TransactionResult adjustorTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = adjustorTransactionHash.Hash});
+            TransactionResult adjustorTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = adjustorTransactionHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
             
             // Deploy the timer contract
             TransactionHash timerTransactionHash = AppServices.createSignDeployContract(
@@ -138,7 +138,7 @@ namespace ApiService.ServiceInterface
                 AppModelConfig.linkContractBytecode(AppModelConfig.TIMER.bytecode, "Lib", libTransResult.ContractAddress), 
                 request.SigningPrivateKey,
                 trustTransResult.ContractAddress);
-            TransactionResult timerTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = timerTransactionHash.Hash});
+            TransactionResult timerTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = timerTransactionHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
 
             // Submit and return the transaction hash of the broadcasted transaction
             TransactionHash initEcosytemHash = AppServices.createSignPublishTransaction(
@@ -157,7 +157,7 @@ namespace ApiService.ServiceInterface
             );
 
             // Get the transaction result
-            TransactionResult initTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = initEcosytemHash.Hash});
+            TransactionResult initTransResult = (TransactionResult)Get(new GetReceipt { TransactionHash = initEcosytemHash.Hash, MaxWaitDurationForTransactionReceipt = 300});
 
             // Return the addresses of the newly created contracts
             return new EcosystemContractAddresses {
