@@ -14,8 +14,8 @@
     src: url("../Fonts/JosefinSlab-Regular.ttf");
 }
 body  {
-    background-color:#fffdf9;
-    color:#564333;
+    background-color:#f7f7f7;
+    color:#304256;
     /* font-family: "Helvetica Neue", Helvetica, Verdana, Arial; */
     font-family: openSans;
     margin: 0;
@@ -36,40 +36,40 @@ body  {
     left: 0;
     bottom: 0;
     width: 100%;
-    background: #19563d;
-    color: fffdf9;
+    background: #DFECF2;
+    color: #F7F7F7;
     text-align: left;
     padding: 0 0 0 0px;
 }
 h1 {
-    color: #fffdf9;
+    color: #304256;
     font-family: josefinSlab;
     font-size: 22px;
     font-weight: bold;
     margin: 0;
     padding: 0 0 0 15px;
-    line-height: 90px;
-    min-height: 90px;
+    line-height: 69px;
+    min-height: 69;
     border-radius: 0px;
-    border-bottom: 1px solid #19563d;
-    background: #19563d; /* Old browsers */
+    border-bottom: 1px solid rgb(203, 213, 217);
+    background: #DFECF2; /* Old browsers */
 }
 h2 {
     margin: 25px 0 20px 0;
-    color: #564333;
+    color: #304256;
     font-size: 24px;
 }
 h3 {
-    color: #564333;
+    color: #304256;
     font-size: 18px;
 }
 a {
-    color: #ffca04;
+    color: #FBCF33;
     font-weight: bold;
     text-decoration: none;
 }
 a:hover, a:focus {
-    color: #ffc904a1;
+    color: #FBCF33;
     text-decoration: underline;
 }
 ul {
@@ -107,7 +107,7 @@ table, tr, th, td {
     font-size: 12px;
     line-height: 18px;
     font-weight: bold;
-    color: #564333;
+    color: #304256;
     padding-left: 1.5em;
     vertical-align: top;
 }
@@ -139,12 +139,12 @@ table, tr, th, td {
     padding-left: 15px;
 }
 .example h3 { 
-    color:#564333;
+    color:#304256;
     margin: 10px 0 0 -15px;
 }
 .example pre {
-    background-color: #ffc9042c;
-    border: 1px solid #ffca04;
+    background-color: rgba(251, 208, 51, 0.226);
+    border: 1px solid #FBCF33;
     font-family: Courier New;
     font-size: 15px;
     padding: 5px;
@@ -153,7 +153,7 @@ table, tr, th, td {
     overflow:auto;
 }
 .example .value {
-    color: #193556;
+    color: #304256;
 }    
 .call-info {
     margin: 0 0 20px 0;
@@ -167,7 +167,7 @@ table, tr, th, td {
     margin: 5px 0;
     padding: 0;
     line-height: 20px;
-    color: #564333;
+    color: #304256;
 }
 table {
     min-width: 430px;
@@ -182,14 +182,14 @@ table {
     position: absolute;
     top: 48px;
     text-align: center;
-    background: #ffb496;
+    background: #F5AC8F;
     width: 100%;
     line-height: 40px;
-    color: #fffdf9;
+    color: #F7F7F7;
 }
 .error-popup a {
     font-weight: normal;
-    color: #fffdf9;
+    color: #F7F7F7;
     font-size: 18px;
     display: block;
 }
