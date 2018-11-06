@@ -1,7 +1,7 @@
 {
-    "Ubuntu_Production": "http://eth.honestinsurance.net:8545/",
+    "Ubuntu_Production": "https://eth.honestinsurance.net",
     "Ubuntu_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
-    "Ubuntu_Development": "http://13.70.147.208:8545",
+    "Ubuntu_Development": "https://eth.honestinsurance.net",
 
     "macOS_Production": "http://localhost:8545/",
     "macOS_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
