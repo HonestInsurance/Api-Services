@@ -27,13 +27,13 @@ For testing purposes, the entire Postman api collection can be accessed [here](h
 ## Looking under the hood
 
 This solution is implemented C# and the following technology stacks are used in this solution:
-* ASP .Net Core version [2.1.5](https://www.nuget.org/packages/Microsoft.AspNetCore.All)
+* ASP .Net Core version [2.1.6](https://www.nuget.org/packages/Microsoft.AspNetCore.All)
 * ServiceStack .Net Core version [5.4.0](https://www.nuget.org/packages/ServiceStack.Core) (plus a valid license key)
 * Nethereum Portable version [2.5.1](https://www.nuget.org/packages/Nethereum.Portable)
 * Fluent validation (Newtonsoft.Json) version [11.0.2](https://www.nuget.org/packages/Newtonsoft.Json)
 
 The solution is hosted on a Ubuntu Server with the following configuration:
-* Ubuntu version 16.04.3 LTS
+* Ubuntu version 16.04.5 LTS
 * Virtual Machine specs: 1 Core; 3.5 GB Memory; 30 GB SSD disk
 * Nginx web server configured to listen on port 80 and 443 and kestrel set up to manage the process
 * Certbot was used to configure Let's Encrypt certificates to enforce all traffic to be HTTPS only

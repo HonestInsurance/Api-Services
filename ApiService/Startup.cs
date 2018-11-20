@@ -47,7 +47,7 @@ namespace ApiService
             // Create a log entry for the environment that has been pick up from the operating system.
             Console.WriteLine("");
             Console.WriteLine("**********************************************************************************************");
-            Console.WriteLine("*** Startup time (UTC)   :  " + System.DateTime.UtcNow.ToShortDateString() + " - " + System.DateTime.UtcNow.ToLongTimeString());
+            Console.WriteLine("*** Startup time (UTC)   :  " + System.DateTime.UtcNow.ToString("yyyy-MM-dd   hh:mm:ss"));
             Console.WriteLine("**********************************************************************************************");
             Console.WriteLine("***  Application Name    :  " + env.ApplicationName);
             Console.WriteLine("***  Hosting environment :  " + env.EnvironmentName);
