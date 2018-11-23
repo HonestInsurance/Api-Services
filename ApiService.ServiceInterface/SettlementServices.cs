@@ -23,7 +23,7 @@ namespace ApiService.ServiceInterface
     {
         public object Get(GetSettlementList request) {
             // Get the contract for the Settlement by specifying the settlement address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETTLEMENT.abi,  AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETTLEMENT,  AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr);
 
             // Create the settlement list object and initialise
             SettlementList list = new SettlementList() { Items = new List<SettlementDetail>() };
@@ -51,7 +51,7 @@ namespace ApiService.ServiceInterface
 
         public object Get(GetSettlement request) {
             // Get the contract for the Settlement by specifying the settlement address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETTLEMENT.abi, AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETTLEMENT, AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr);
 
             // SettlementListEntry entry = contract.GetFunction("get").CallDeserializingToObjectAsync<SettlementListEntry>(i).Result;
             // If no settlement hash has been provided as part of the request get the corresponding hash that belongs to the provided idx
@@ -87,7 +87,7 @@ namespace ApiService.ServiceInterface
             object[] ft3 = (request.Info.IsEmpty() == true ? null : new object[]{ request.Info.HexToByteArray() });
 
             // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETTLEMENT.abi, AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETTLEMENT, AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr);
             
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogSettlement").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
@@ -117,7 +117,7 @@ namespace ApiService.ServiceInterface
         public object Post(CreateSettlement request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.SETTLEMENT.abi,
+                AppModelConfig.SETTLEMENT,
                 AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr,
                 request.SigningPrivateKey,
                 "createSettlement",
@@ -130,7 +130,7 @@ namespace ApiService.ServiceInterface
         public object Put(AddSettlementInfo request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.SETTLEMENT.abi,
+                AppModelConfig.SETTLEMENT,
                 AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr,
                 request.SigningPrivateKey,
                 "addSettlementInfo",
@@ -143,7 +143,7 @@ namespace ApiService.ServiceInterface
         public object Put(CloseSettlement request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.SETTLEMENT.abi,
+                AppModelConfig.SETTLEMENT,
                 AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr,
                 request.SigningPrivateKey,
                 "closeSettlement",
@@ -157,7 +157,7 @@ namespace ApiService.ServiceInterface
         public object Put(SetExpectedSettlementAmount request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.SETTLEMENT.abi,
+                AppModelConfig.SETTLEMENT,
                 AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr,
                 request.SigningPrivateKey,
                 "setExpectedSettlementAmount",

@@ -23,7 +23,7 @@ namespace ApiService.ServiceInterface
     {
         public object Get(GetPolicyList request) {
             // Get the contract for the Policy by specifying the Policy address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POLICY.abi,  AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POLICY,  AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr);
 
             // Create the Policy list object and initialise
             PolicyList list = new PolicyList() { Items = new List<PolicyDetail>() };
@@ -68,7 +68,7 @@ namespace ApiService.ServiceInterface
 
         public object Get(GetPolicy request) {
             // Get the contract for the Policy by specifying the Policy address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POLICY.abi, AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POLICY, AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr);
 
             // PolicyListEntry entry = contract.GetFunction("get").CallDeserializingToObjectAsync<PolicyListEntry>(i).Result;
             // If no Policy hash has been provided as part of the request get the corresponding hash that belongs to the provided idx
@@ -112,7 +112,7 @@ namespace ApiService.ServiceInterface
             }
 
             // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POLICY.abi, AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POLICY, AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr);
             
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogPolicy").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
@@ -147,7 +147,7 @@ namespace ApiService.ServiceInterface
         public object Post(CreatePolicy request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.POLICY.abi,
+                AppModelConfig.POLICY,
                 AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr,
                 request.SigningPrivateKey,
                 "createPolicy",
@@ -161,7 +161,7 @@ namespace ApiService.ServiceInterface
         public object Put(UpdatePolicy request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.POLICY.abi,
+                AppModelConfig.POLICY,
                 AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr,
                 request.SigningPrivateKey,
                 "updatePolicy",
@@ -175,7 +175,7 @@ namespace ApiService.ServiceInterface
         public object Put(SuspendPolicy request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.POLICY.abi,
+                AppModelConfig.POLICY,
                 AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr,
                 request.SigningPrivateKey,
                 "suspendPolicy",
@@ -186,7 +186,7 @@ namespace ApiService.ServiceInterface
         public object Put(UnsuspendPolicy request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.POLICY.abi,
+                AppModelConfig.POLICY,
                 AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr,
                 request.SigningPrivateKey,
                 "unsuspendPolicy",
@@ -197,7 +197,7 @@ namespace ApiService.ServiceInterface
         public object Put(RetirePolicy request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.POLICY.abi,
+                AppModelConfig.POLICY,
                 AppServices.GetEcosystemAdr(request.ContractAdr).PolicyContractAdr,
                 request.SigningPrivateKey,
                 "retirePolicy",

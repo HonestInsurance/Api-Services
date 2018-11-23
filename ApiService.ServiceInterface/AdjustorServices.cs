@@ -23,7 +23,7 @@ namespace ApiService.ServiceInterface
     {
         public object Get(GetAdjustorList request) {
             // Get the contract for the Adjustor by specifying the adjustor address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND.abi,  AppServices.GetEcosystemAdr(request.ContractAdr).AdjustorContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND,  AppServices.GetEcosystemAdr(request.ContractAdr).AdjustorContractAdr);
 
             // Create the adjustor list object and initialise
             AdjustorList list = new AdjustorList() { Items = new List<AdjustorDetail>() };
@@ -51,7 +51,7 @@ namespace ApiService.ServiceInterface
 
         public object Get(GetAdjustor request) {
             // Get the contract for the Adjustor by specifying the adjustor address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND.abi, AppServices.GetEcosystemAdr(request.ContractAdr).AdjustorContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND, AppServices.GetEcosystemAdr(request.ContractAdr).AdjustorContractAdr);
 
             // AdjustorListEntry entry = contract.GetFunction("get").CallDeserializingToObjectAsync<AdjustorListEntry>(i).Result;
             // If no adjustor hash has been provided as part of the request get the corresponding hash that belongs to the provided idx
@@ -95,7 +95,7 @@ namespace ApiService.ServiceInterface
             }
 
             // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.ADJUSTOR.abi, AppServices.GetEcosystemAdr(request.ContractAdr).AdjustorContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.ADJUSTOR, AppServices.GetEcosystemAdr(request.ContractAdr).AdjustorContractAdr);
             
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogAdjustor").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
@@ -129,7 +129,7 @@ namespace ApiService.ServiceInterface
         public object Post(CreateAdjustor request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.TRUST.abi,
+                AppModelConfig.TRUST,
                 AppServices.GetEcosystemAdr(request.ContractAdr).TrustContractAdr,
                 request.SigningPrivateKey,
                 "createAdjustor",
@@ -143,7 +143,7 @@ namespace ApiService.ServiceInterface
         public object Put(UpdateAdjustor request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.TRUST.abi,
+                AppModelConfig.TRUST,
                 AppServices.GetEcosystemAdr(request.ContractAdr).TrustContractAdr,
                 request.SigningPrivateKey,
                 "updateAdjustor",
@@ -158,7 +158,7 @@ namespace ApiService.ServiceInterface
         public object Put(RetireAdjustor request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.TRUST.abi,
+                AppModelConfig.TRUST,
                 AppServices.GetEcosystemAdr(request.ContractAdr).TrustContractAdr,
                 request.SigningPrivateKey,
                 "retireAdjustor",

@@ -23,18 +23,18 @@ namespace ApiService.ServiceModel
     public static class AppModelConfig
     {
         // Contract details (ABI, Binary, Contract name, etc.) of the smart contracts this solution iteracts with
-        public static readonly ContractAbi EXTACCESSI;
-        public static readonly ContractAbi INTACCESSI;
-        public static readonly ContractAbi SETUPI;
-        public static readonly ContractAbi LIB;
-        public static readonly ContractAbi POOL;
-        public static readonly ContractAbi BOND;
-        public static readonly ContractAbi BANK;
-        public static readonly ContractAbi POLICY;
-        public static readonly ContractAbi SETTLEMENT;
-        public static readonly ContractAbi ADJUSTOR;
-        public static readonly ContractAbi TIMER;
-        public static readonly ContractAbi TRUST;
+        public static readonly string EXTACCESSI;
+        public static readonly string INTACCESSI;
+        public static readonly string SETUPI;
+        public static readonly string LIB;
+        public static readonly string POOL;
+        public static readonly string BOND;
+        public static readonly string BANK;
+        public static readonly string POLICY;
+        public static readonly string SETTLEMENT;
+        public static readonly string ADJUSTOR;
+        public static readonly string TIMER;
+        public static readonly string TRUST;
         public static IHostingEnvironment hostingEnvironment;
         public static ulong defaultGasPrice;
         public static ulong defaultGasLimit;
@@ -50,19 +50,23 @@ namespace ApiService.ServiceModel
 
         // Constructor of this static class
         static AppModelConfig() {
-            // Load and parse all the Ethereum contract json files this solution interacts with
-            EXTACCESSI = parseContractJsonFile("config/ExtAccessI.json");
-            INTACCESSI = parseContractJsonFile("config/IntAccessI.json");
-            SETUPI = parseContractJsonFile("config/SetupI.json");
-            LIB = parseContractJsonFile("config/Lib.json");
-            POOL = parseContractJsonFile("config/Pool.json");
-            BOND = parseContractJsonFile("config/Bond.json");
-            BANK = parseContractJsonFile("config/Bank.json");
-            POLICY = parseContractJsonFile("config/Policy.json");
-            SETTLEMENT = parseContractJsonFile("config/Settlement.json");
-            ADJUSTOR = parseContractJsonFile("config/Adjustor.json");
-            TIMER = parseContractJsonFile("config/Timer.json");
-            TRUST = parseContractJsonFile("config/Trust.json");
+            using (StreamReader r = new StreamReader("config/contractABIs.json")) {
+                // Create a Json Object and parse the stream reader's input
+                JObject json = JObject.Parse(r.ReadToEnd());
+                // Load and parse all the Ethereum contract json files this solution interacts with
+                EXTACCESSI = json.Value<JArray>("abiExtAccessI").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                INTACCESSI = json.Value<JArray>("abiIntAccessI").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                SETUPI = json.Value<JArray>("abiSetupI").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                LIB = json.Value<JArray>("abiLib").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                POOL = json.Value<JArray>("abiPool").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                BOND = json.Value<JArray>("abiBond").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                BANK = json.Value<JArray>("abiBank").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                POLICY = json.Value<JArray>("abiPolicy").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                SETTLEMENT = json.Value<JArray>("abiSettlement").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                ADJUSTOR = json.Value<JArray>("abiAdjustor").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                TIMER = json.Value<JArray>("abiTimer").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+                TRUST = json.Value<JArray>("abiTrust").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", "");
+            }
         }
 
         // Uses the provided Hosting Environment varialbe to load and initialise 
@@ -97,26 +101,6 @@ namespace ApiService.ServiceModel
                 // Get the DefaultNumberEntriesForLazyLoading
                 defaultBlockRangeForEventLogLoading = json.Value<ulong>("DefaultBlockRangeForEventLogLoading");
             }
-        }
-
-        // Parses the provided json file and returns its content as a ContractAbi instance
-        public static ContractAbi parseContractJsonFile(string jsonFilePath) {
-            using (StreamReader r = new StreamReader(jsonFilePath)) {
-                // Create a Json Object and parse the stream reader's input
-                JObject json = JObject.Parse(r.ReadToEnd());
-                // Return the Contract Abi instance with all the values
-                return new ContractAbi {
-                    contractName = json.Value<string>("contractName"),
-                    abi = json.Value<JArray>("abi").ToString().ReplaceAll("\"", "'").ReplaceAll("\n", "").ReplaceAll(" ", ""),
-                    bytecode = json.Value<string>("bytecode")
-                };
-            }
-        }
-
-        // Inserts the provided address in the binary to link it
-        public static string linkContractBytecode(string bytecode, string contractName, string contractAdr) {
-            string strToReplace = ("__" + contractName + "______________________________________").Substring(0, 40);
-            return bytecode.ReplaceAll(strToReplace, contractAdr.Replace("0x", ""));
         }
 
         // Verify if a string provided is an empty hash

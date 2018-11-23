@@ -32,7 +32,7 @@ namespace ApiService.ServiceInterface
             object[] ft3 = (request.Success == SuccessFilter.All ? null : (request.Success == SuccessFilter.Positive ? new object[]{ true } : new object[]{ false }));
 
             // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BANK.abi, AppServices.GetEcosystemAdr(request.ContractAdr).BankContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BANK, AppServices.GetEcosystemAdr(request.ContractAdr).BankContractAdr);
             
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogBank").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
@@ -67,7 +67,7 @@ namespace ApiService.ServiceInterface
 
         public object Get(GetBankPaymentAdviceList request) {
             // Get the contract for the Bank by specifying the bank address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BANK.abi, AppServices.GetEcosystemAdr(request.ContractAdr).BankContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BANK, AppServices.GetEcosystemAdr(request.ContractAdr).BankContractAdr);
 
             // Create a new return instance for Bank Metadata and set the Bank contract address
             uint countPaymentAdvice = contract.GetFunction("countPaymentAdviceEntries").CallAsync<uint>().Result;
@@ -97,7 +97,7 @@ namespace ApiService.ServiceInterface
         public object Post(ProcessBankPaymentAdvice request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.BANK.abi, 
+                AppModelConfig.BANK, 
                 AppServices.GetEcosystemAdr(request.ContractAdr).BankContractAdr,
                 request.SigningPrivateKey,
                 "processPaymentAdvice",
@@ -113,7 +113,7 @@ namespace ApiService.ServiceInterface
 
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.BANK.abi,
+                AppModelConfig.BANK,
                 AppServices.GetEcosystemAdr(request.ContractAdr).BankContractAdr,
                 request.SigningPrivateKey,
                 "processAccountCredit",

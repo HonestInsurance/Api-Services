@@ -33,7 +33,7 @@ namespace ApiService.ServiceInterface
             EcosystemStatus status = new EcosystemStatus();
 
             // Load the trust contract to retrieve the external access interface duration for pre-authorisation
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POOL.abi, adr.PoolContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POOL, adr.PoolContractAdr);
 
             status.currentPoolDay = contract.GetFunction("currentPoolDay").CallAsync<ulong>().Result;
             status.isWinterTime = contract.GetFunction("isWinterTime").CallAsync<bool>().Result;
@@ -60,28 +60,28 @@ namespace ApiService.ServiceInterface
             status.bondYieldAccelerationThreshold = contract.GetFunction("bondYieldAccelerationThreshold").CallAsync<ulong>().Result;
 
             // Load the bond contract
-            contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND.abi, adr.BondContractAdr);
+            contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND, adr.BondContractAdr);
             status.BondListInfo = contract.GetFunction("hashMap").CallDeserializingToObjectAsync<ListInfo>().Result;
 
             // Load the policy contract
-            contract = AppServices.web3.Eth.GetContract(AppModelConfig.POLICY.abi, adr.PolicyContractAdr);
+            contract = AppServices.web3.Eth.GetContract(AppModelConfig.POLICY, adr.PolicyContractAdr);
             status.totalIssuedPolicyRiskPoints = contract.GetFunction("totalIssuedPolicyRiskPoints").CallAsync<ulong>().Result;
             status.PolicyListInfo = contract.GetFunction("hashMap").CallDeserializingToObjectAsync<ListInfo>().Result;
 
             // Load the adjustor contract
-            contract = AppServices.web3.Eth.GetContract(AppModelConfig.ADJUSTOR.abi, adr.AdjustorContractAdr);
+            contract = AppServices.web3.Eth.GetContract(AppModelConfig.ADJUSTOR, adr.AdjustorContractAdr);
             status.AdjustorListInfo = contract.GetFunction("hashMap").CallDeserializingToObjectAsync<ListInfo>().Result;
 
             // Load the settlement contract
-            contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETTLEMENT.abi, adr.SettlementContractAdr);
+            contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETTLEMENT, adr.SettlementContractAdr);
             status.SettlementListInfo = contract.GetFunction("hashMap").CallDeserializingToObjectAsync<ListInfo>().Result;
 
             // Load the bank contract
-            contract = AppServices.web3.Eth.GetContract(AppModelConfig.BANK.abi, adr.BankContractAdr);
+            contract = AppServices.web3.Eth.GetContract(AppModelConfig.BANK, adr.BankContractAdr);
             status.fundingAccountPaymentsTracking_Cu = contract.GetFunction("fundingAccountPaymentsTracking_Cu").CallAsync<ulong>().Result;
 
             // Load the timer contract
-            contract = AppServices.web3.Eth.GetContract(AppModelConfig.TIMER.abi, adr.TimerContractAdr);
+            contract = AppServices.web3.Eth.GetContract(AppModelConfig.TIMER, adr.TimerContractAdr);
             status.lastPingExececution = contract.GetFunction("lastPingExec_10_S").CallAsync<ulong>().Result * 10;
 
             return status;
@@ -98,7 +98,7 @@ namespace ApiService.ServiceInterface
             object[] ft3 = (request.Value == 0 ? null : new object[]{ request.Value });
 
             // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POOL.abi, AppServices.GetEcosystemAdr(request.ContractAdr).PoolContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POOL, AppServices.GetEcosystemAdr(request.ContractAdr).PoolContractAdr);
             
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogPool").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
@@ -132,12 +132,12 @@ namespace ApiService.ServiceInterface
             EcosystemConfiguration setup = new EcosystemConfiguration();
 
             // Load the trust contract to retrieve the external access interface duration for pre-authorisation
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.EXTACCESSI.abi, adr.TrustContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.EXTACCESSI, adr.TrustContractAdr);
             // Pre-authorisation duration for external authentication
             setup.EXT_ACCESS_PRE_AUTH_DURATION_SEC = contract.GetFunction("EXT_ACCESS_PRE_AUTH_DURATION_SEC").CallAsync<ulong>().Result;
 
             // Get the contract for the Pool by specifying the pool address
-            contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETUPI.abi, adr.PoolContractAdr);            
+            contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETUPI, adr.PoolContractAdr);            
             setup.POOL_NAME = contract.GetFunction("POOL_NAME").CallAsync<string>().Result;
 
             // Constants used by the Insurance Pool
@@ -208,7 +208,7 @@ namespace ApiService.ServiceInterface
             object[] ft3 = (request.Info.IsEmpty() == true ? null : new object[]{ AppModelConfig.convertToHex64(request.Info).HexToByteArray() });
 
             // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.TRUST.abi, AppServices.GetEcosystemAdr(request.ContractAdr).TrustContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.TRUST, AppServices.GetEcosystemAdr(request.ContractAdr).TrustContractAdr);
             
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogTrust").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
@@ -241,7 +241,7 @@ namespace ApiService.ServiceInterface
         public object Put(SetWcExpenses request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.TRUST.abi, 
+                AppModelConfig.TRUST, 
                 AppServices.GetEcosystemAdr(request.ContractAdr).TrustContractAdr,
                 request.SigningPrivateKey,
                 "setWcExpenses",
@@ -252,7 +252,7 @@ namespace ApiService.ServiceInterface
         public object Put(AdjustDaylightSaving request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.TRUST.abi, 
+                AppModelConfig.TRUST, 
                 AppServices.GetEcosystemAdr(request.ContractAdr).TrustContractAdr,
                 request.SigningPrivateKey,
                 "adjustDaylightSaving"
@@ -274,18 +274,18 @@ namespace ApiService.ServiceInterface
                 DefaultBlockRangeForEventLogLoading = AppModelConfig.defaultBlockRangeForEventLogLoading,
                 Web3UrlEndpoint = AppModelConfig.WEB3_URL_ENDPOINT,
                 AutoSchedulePingDuration = AppServices.getPingTimerInterval(),
-                ExternalAccessInterfaceAbi = AppModelConfig.EXTACCESSI.abi,
-                InternalAccessInterfaceAbi = AppModelConfig.INTACCESSI.abi,
-                SetupInterfaceAbi = AppModelConfig.SETUPI.abi,
-                LibraryAbi = AppModelConfig.LIB.abi,
-                PoolAbi = AppModelConfig.POOL.abi,
-                BondAbi = AppModelConfig.BOND.abi,
-                BankAbi = AppModelConfig.BANK.abi,
-                PolicyAbi = AppModelConfig.POLICY.abi,
-                SettlementAbi = AppModelConfig.SETTLEMENT.abi,
-                AdjustorAbi = AppModelConfig.ADJUSTOR.abi,
-                TimerAbi = AppModelConfig.TIMER.abi,
-                TrustAbi = AppModelConfig.TRUST.abi
+                ExternalAccessInterfaceAbi = AppModelConfig.EXTACCESSI,
+                InternalAccessInterfaceAbi = AppModelConfig.INTACCESSI,
+                SetupInterfaceAbi = AppModelConfig.SETUPI,
+                LibraryAbi = AppModelConfig.LIB,
+                PoolAbi = AppModelConfig.POOL,
+                BondAbi = AppModelConfig.BOND,
+                BankAbi = AppModelConfig.BANK,
+                PolicyAbi = AppModelConfig.POLICY,
+                SettlementAbi = AppModelConfig.SETTLEMENT,
+                AdjustorAbi = AppModelConfig.ADJUSTOR,
+                TimerAbi = AppModelConfig.TIMER,
+                TrustAbi = AppModelConfig.TRUST
             };
         }
 
@@ -295,7 +295,7 @@ namespace ApiService.ServiceInterface
 
         public object Get(GetContractAuthKeys request) {
             // Get the contract for the Pool by specifying the pool address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.EXTACCESSI.abi, request.ContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.EXTACCESSI, request.ContractAdr);
             // Create a new return instance for Pool Metadata and set the Pool contract address
             ContractAuthKeys keys = contract.GetFunction("getExtAccessKey").CallDeserializingToObjectAsync<ContractAuthKeys>().Result;
             keys.PreAuthKeyUsed = contract.GetFunction("getPreAuthKey").CallAsync<string>().Result;
@@ -307,7 +307,7 @@ namespace ApiService.ServiceInterface
         public object Put(PreAuth request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.EXTACCESSI.abi, 
+                AppModelConfig.EXTACCESSI, 
                 request.ContractAdr, 
                 request.SigningPrivateKey,
                 "preAuth",
@@ -318,7 +318,7 @@ namespace ApiService.ServiceInterface
         public object Put(AddAuthKey request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.EXTACCESSI.abi, 
+                AppModelConfig.EXTACCESSI, 
                 request.ContractAdr, 
                 request.SigningPrivateKey,
                 "addKey",
@@ -329,7 +329,7 @@ namespace ApiService.ServiceInterface
         public object Put(RotateAuthKey request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.EXTACCESSI.abi, 
+                AppModelConfig.EXTACCESSI, 
                 request.ContractAdr, 
                 request.SigningPrivateKey,
                 "rotateKey",

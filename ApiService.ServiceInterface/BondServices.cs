@@ -23,7 +23,7 @@ namespace ApiService.ServiceInterface
     {
         public object Get(GetBondList request) {
             // Get the contract for the Bond by specifying the bond address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND.abi,  AppServices.GetEcosystemAdr(request.ContractAdr).BondContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND,  AppServices.GetEcosystemAdr(request.ContractAdr).BondContractAdr);
 
             // Create the bond list object and initialise
             BondList list = new BondList() { Items = new List<BondDetail>() };
@@ -68,7 +68,7 @@ namespace ApiService.ServiceInterface
 
         public object Get(GetBond request) {
             // Get the contract for the Bond by specifying the bond address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND.abi, AppServices.GetEcosystemAdr(request.ContractAdr).BondContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND, AppServices.GetEcosystemAdr(request.ContractAdr).BondContractAdr);
 
             // BondListEntry entry = contract.GetFunction("get").CallDeserializingToObjectAsync<BondListEntry>(i).Result;
             // If no bond hash has been provided as part of the request get the corresponding hash that belongs to the provided idx
@@ -113,7 +113,7 @@ namespace ApiService.ServiceInterface
             }
 
             // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND.abi, AppServices.GetEcosystemAdr(request.ContractAdr).BondContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND, AppServices.GetEcosystemAdr(request.ContractAdr).BondContractAdr);
             
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogBond").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
@@ -147,7 +147,7 @@ namespace ApiService.ServiceInterface
         public object Post(CreateBond request) {
             // Submit and return the transaction hash of the broadcasted transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.BOND.abi,
+                AppModelConfig.BOND,
                 AppServices.GetEcosystemAdr(request.ContractAdr).BondContractAdr,
                 request.SigningPrivateKey,
                 "createBond",

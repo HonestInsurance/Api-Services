@@ -25,7 +25,7 @@ namespace ApiService.ServiceInterface
             // Maximal duration that can be specified to retrive notifications for (24 hours)
             ulong maxDuration = 3600 * 24;
             // Get the contract for the Bond by specifying the bond address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.TIMER.abi, AppServices.GetEcosystemAdr(request.ContractAdr).TimerContractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.TIMER, AppServices.GetEcosystemAdr(request.ContractAdr).TimerContractAdr);
 
             // Get the current time from the blockchain from the timer contract
             ulong currentTimeEPOCH = contract.GetFunction("getBlockchainEPOCHTime").CallAsync<ulong>().Result;
@@ -90,7 +90,7 @@ namespace ApiService.ServiceInterface
             AppServices.configureTimerPing(timerContractAdr, request.SigningPrivateKey, request.AutoSchedulePingDuration);
             // Submit and return the transaction hash of the broadcasted ping transaction
             return AppServices.createSignPublishTransaction(
-                AppModelConfig.TIMER.abi, 
+                AppModelConfig.TIMER, 
                 timerContractAdr,
                 request.SigningPrivateKey,
                 "ping"
