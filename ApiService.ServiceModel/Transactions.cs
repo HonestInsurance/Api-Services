@@ -26,20 +26,4 @@ namespace ApiService.ServiceModel
                 .WithMessage(AppModelConfig.HashErrorMessage);
         }
     }
-
-    [Api("Deploys all the required contracts")]
-    [Route("/deploy", "POST", Summary = "Returns the addresses of all the contracts that has just have been deployed")]
-    public class DeployContracts : IReturn<EcosystemContractAddresses>, IPost {
-        [ApiMember(IsRequired = true, Description = "The private key to sign and own the deployed contracts")]
-        public string SigningPrivateKey { get; set; }
-        [ApiMember(IsRequired = true, Description = "Indicates if the pool needs to be set up with summer or winter timezone setting")]
-        public bool IsWinterTime { get; set; }
-    }
-    public class DeployContractsValidator : AbstractValidator<DeployContracts> {
-        public DeployContractsValidator() {
-            RuleFor(x => x.SigningPrivateKey).Must((x, privateKey) => AppModelConfig.validatePrivateKey(privateKey, true))
-                .WithErrorCode(AppModelConfig.PrivateKeyError)
-                .WithMessage(AppModelConfig.PrivateKeyErrorMessage);
-        }
-    }
 }

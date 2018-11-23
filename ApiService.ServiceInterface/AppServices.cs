@@ -67,7 +67,7 @@ namespace ApiService.ServiceInterface
         public static EcosystemContractAddresses GetEcosystemAdr(string contractAdr)
         {
             // Retrieve contract of the INTACCESS interface abi by specifiey the provided address
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.INTACCESSI.abi, contractAdr);
+            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.INTACCESSI, contractAdr);
             try {
                 // Retrieve the contract addresses that form the ecosystem for this bond contract
                 return contract.GetFunction("getContractAdr").CallDeserializingToObjectAsync<EcosystemContractAddresses>().Result;
@@ -133,39 +133,6 @@ namespace ApiService.ServiceInterface
             // }
         }
 
-        // Creates and deploys the specified contract to the Blockchain
-        public static TransactionHash createSignDeployContract(string abi, string linkedBinary, 
-            string signingPrivateKey, params object []inputParams)
-        {
-            try {
-                return new TransactionHash {            
-                    Hash = new Web3(new Account(signingPrivateKey), AppModelConfig.WEB3_URL_ENDPOINT).Eth.DeployContract.SendRequestAsync(
-                        abi,                                                        // Contract ABI
-                        linkedBinary,                                               // Linked contract binary
-                        EthECKey.GetPublicAddress(signingPrivateKey),               // Public key of transaction signer key used
-                        new HexBigInteger(AppModelConfig.defaultGasLimit),          // Gas limit
-                        new HexBigInteger(AppModelConfig.defaultGasPrice),          // Gas price
-                        new HexBigInteger(0),                                       // Amount in wei sent with deployment
-                        inputParams).Result                                         // Deployment parameters
-                };
-
-                // Hash = new Web3(new Account(signingPrivateKey), AppModelConfig.WEB3_URL_ENDPOINT).Eth.DeployContract.SendRequestAsync(
-                //     abi, 
-                //     linkedBinary,
-                //     EthECKey.GetPublicAddress(signingPrivateKey),
-                //     new HexBigInteger(4712388),             // This is the default block gas limit
-                //     null, 
-                //     inputParams).Result
-                
-            } catch (Exception exc) {
-                // If the transaction was rejected by the blockchain return and throw an HTTP Error
-                throw new HttpError(
-                    HttpStatusCode.NotAcceptable,
-                    AppModelConfig.TransactionProcessingError,
-                    AppModelConfig.TransactionProcessingErrorMessage + "   ---   " + exc.Message);
-            }
-        }
-
         public static void configureTimerPing(string timerAdr, string signingPrivateKey, ulong autoSchedulePingDuration)
         {
             // If auto ping duration is set to 0 deactivate auto ping functionality
@@ -200,7 +167,7 @@ namespace ApiService.ServiceInterface
         {
             // When the timer event is fired create a ping transaction
             AppServices.createSignPublishTransaction(
-                AppModelConfig.TIMER.abi, 
+                AppModelConfig.TIMER, 
                 pingTimerContractAdr, 
                 pingTimerSigningPrivateKey,
                 "ping"
