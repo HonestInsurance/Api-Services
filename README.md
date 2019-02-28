@@ -46,7 +46,7 @@ The links below can be used to connect to a public Blockchain and retrieve polic
 * [List of all available APIs and documentation](https://api.honestinsurance.net)
 * [Server and ecosystem configuration info](https://api.honestinsurance.net/config)
 * [Status of the ecosystem](https://api.honestinsurance.net/ecosystem/status?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11)
-* [Log files of ecosystem](https://api.honestinsurance.net/ecosystem/logs?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11)
+* [Log files of ecosystem](https://api.honestinsurance.net/ecosystem/logs?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11&FromBlock=2332700&ToBlock=2410000)
 * [List of all bonds](https://api.honestinsurance.net/bond/list?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11)
 * [Details of bond 1](https://api.honestinsurance.net/bond?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11&Idx=1)
 * [List of all policies](https://api.honestinsurance.net/policy/list?ContractAdr=0x13014a77f51847b803cc0327a12ff06cb55f6d11)
