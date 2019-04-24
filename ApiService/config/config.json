@@ -1,9 +1,9 @@
 {
-    "Ubuntu_Production": "https://eth.honestinsurance.net",
-    "Ubuntu_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
-    "Ubuntu_Development": "https://rinkeby.honestinsurance.net",
+    "Ubuntu_Production": "https://rinkeby.honestinsurance.net",
+    "Ubuntu_Staging": "https://rinkeby.infura.io/v3/ccf29b463e894a28bb5dbaa07a22b53b",
+    "Ubuntu_Development": "https://rinkeby.infura.io/v3/ccf29b463e894a28bb5dbaa07a22b53b",
 
-    "macOS_Production": "http://localhost:8545/",
+    "macOS_Production": "https://rinkeby.infura.io/v3/ccf29b463e894a28bb5dbaa07a22b53b",
     "macOS_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
     "macOS_Development": "http://localhost:8545/",
     
