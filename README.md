@@ -27,10 +27,10 @@ For testing purposes, the entire Postman api collection can be accessed [here](h
 ## Looking under the hood
 
 This solution is implemented C# and the following technology stacks are used in this solution:
-* ASP .Net Core version [2.2.2](https://www.nuget.org/packages/Microsoft.AspNetCore.All)
-* ServiceStack .Net Core version [5.4.0](https://www.nuget.org/packages/ServiceStack.Core) (plus a valid license key)
+* ASP .Net Core version [2.2.4](https://www.nuget.org/packages/Microsoft.AspNetCore.All)
+* ServiceStack .Net Core version [5.5.0](https://www.nuget.org/packages/ServiceStack.Core) (plus a valid license key)
 * Nethereum Portable version [2.5.1](https://www.nuget.org/packages/Nethereum.Portable)
-* Fluent validation (Newtonsoft.Json) version [11.0.2](https://www.nuget.org/packages/Newtonsoft.Json)
+* Fluent validation (Newtonsoft.Json) version [12.0.2](https://www.nuget.org/packages/Newtonsoft.Json)
 
 The solution is hosted on a Ubuntu Server with the following configuration:
 * Ubuntu version 16.04.5 LTS
