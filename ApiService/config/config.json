@@ -4,8 +4,8 @@
     "Ubuntu_Development": "https://rinkeby.infura.io/v3/ccf29b463e894a28bb5dbaa07a22b53b",
 
     "macOS_Production": "https://rinkeby.infura.io/v3/ccf29b463e894a28bb5dbaa07a22b53b",
-    "macOS_Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
-    "macOS_Development": "http://localhost:8545/",
+    "macOS_Staging": "http://localhost:8545/",
+    "macOS_Development": "https://rinkeby.infura.io/v3/ccf29b463e894a28bb5dbaa07a22b53b",
     
     "Production": "http://eth.honestinsurance.net:8545/",
     "Staging": "https://rinkeby.infura.io/x6DJkucXINzFNKeNjYbz",
