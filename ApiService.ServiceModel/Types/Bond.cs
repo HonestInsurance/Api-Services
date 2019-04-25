@@ -22,7 +22,7 @@ namespace ApiService.ServiceModel
     }
 
     [FunctionOutput]
-    public class BondDetail {
+    public class BondDetail : IFunctionOutputDTO {
         [ApiMember(IsRequired = true, Description = "The hash of the bond")]
         public string Hash { get; set; }
 
@@ -83,8 +83,9 @@ namespace ApiService.ServiceModel
         public List<BondEventLog> EventLogs {get; set;}
     }
 
-    [FunctionOutput]
-    public class BondEventLog {
+    [Event("LogBond")]
+    //event LogBond(bytes32 indexed bondHash, address indexed owner, bytes32 indexed info, uint timestamp, uint state);
+    public class BondEventLog : IEventDTO {
         [ApiMember(IsRequired = true, Description = "The block number this event was triggered")]
         public ulong BlockNumber { get; set; }
         

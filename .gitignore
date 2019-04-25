@@ -5,3 +5,4 @@ ApiService.ServiceInterface/bin/*
 ApiService.ServiceInterface/obj/*
 ApiService.ServiceModel/bin/*
 ApiService.ServiceModel/obj/*
+.DS_Store
