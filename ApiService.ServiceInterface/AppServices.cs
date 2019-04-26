@@ -88,7 +88,7 @@ namespace ApiService.ServiceInterface
                 signingPrivateKey,                  // privateKey
                 contractAddress,                    // to
                 0,                                  // amount in wei to send with transaction
-                web3.Eth.Transactions.GetTransactionCount.SendRequestAsync(EthECKey.GetPublicAddress(signingPrivateKey)).Result,      // nonce value
+                web3.Eth.Transactions.GetTransactionCount.SendRequestAsync(EthECKey.GetPublicAddress(signingPrivateKey), BlockParameter.CreatePending()).Result,      // nonce value - also considers the nonces of transactions that are submitted by not yet mined
                 AppModelConfig.defaultGasPrice,     // gasPrice
                 AppModelConfig.defaultGasLimit,     // gasLimit
                 web3.Eth.GetContract(abi, contractAddress).GetFunction(contractFunction).GetData(inputParams)       // data

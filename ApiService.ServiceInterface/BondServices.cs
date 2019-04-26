@@ -50,8 +50,8 @@ namespace ApiService.ServiceInterface
             }
             else {
                 // Get all the log files that match the bond owner's address specified
-                List<BondEventLog> logs = ((BondLogs)this.Get(
-                    new GetBondLogs { ContractAdr = request.ContractAdr, Owner = request.Owner })).EventLogs;
+                List<BondLog> logs = ((BondLogs)this.Get(
+                    new GetBondLogs { ContractAdr = request.ContractAdr, Owner = request.Owner })).Logs;
                 // Filter the list only for Created state entries and sort it with timestamp desc
                 var filteredList = logs.GroupBy(x => x.Hash).Select(x => x.FirstOrDefault()).ToList().OrderByDescending(o=>o.Timestamp).ToList();
                 // Iterate through the list
@@ -79,14 +79,14 @@ namespace ApiService.ServiceInterface
             BondDetail bond = contract.GetFunction("dataStorage").CallDeserializingToObjectAsync<BondDetail>(request.Hash.HexToByteArray()).Result;
             // Set the bond hash to the requested has as specified in the request
             bond.Hash = request.Hash;
-            bond.EventLogs = new List<BondEventLog>();
+            bond.Logs = new List<BondLog>();
 
             // If bond hash is set retrieve the logs for the bond
             if (AppModelConfig.isEmptyHash(bond.Hash) == false) {
-                bond.EventLogs = ((BondLogs)this.Get(
-                    new GetBondLogs {ContractAdr = request.ContractAdr, Hash = request.Hash})).EventLogs;
+                bond.Logs = (((BondLogs)this.Get(
+                    new GetBondLogs {ContractAdr = request.ContractAdr, Hash = request.Hash}))).Logs;
                 // Just for the Bond specific event logs reverse the order to have the events in ascending order
-                bond.EventLogs.Reverse();
+                bond.Logs.Reverse();
             }
 
             // Return the bond
@@ -118,26 +118,12 @@ namespace ApiService.ServiceInterface
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogBond").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
             
-            // Extract all the logs as specified by the filter input
-            var res = AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result;
+            // Create return variable 
+            BondLogs logs = new BondLogs(){ Logs = new List<BondLog>() };
 
-            // Create the return instance
-            var logs = new BondLogs() { EventLogs = new List<BondEventLog>() };
-
-            // Interate through all the returned logs and add them to the logs list
-            for (int i=res.Length - 1; i>=0; i--) {
-                var log = new BondEventLog();
-                log.BlockNumber = Convert.ToUInt64(res[i].BlockNumber.HexValue, 16);
-                log.Hash = res[i].Topics[1].ToString();        
-                log.Owner = AppModelConfig.getAdrFromString32(res[i].Topics[2].ToString());
-                log.Timestamp = Convert.ToUInt64(res[i].Data.Substring(2 + 0 * 64, 64), 16);
-                log.State = (BondState)Convert.ToInt32(res[i].Data.Substring(2 + 1 * 64,64), 16);
-                if (AppModelConfig.isEmptyHash(log.Hash))
-                    log.Info = AppModelConfig.FromHexString(res[i].Topics[3].ToString());
-                else if ((log.State == BondState.SecuredReferenceBond) || (log.State == BondState.LockedReferenceBond))
-                    log.Info = res[i].Topics[3].ToString().EnsureHexPrefix();
-                else log.Info = Convert.ToInt64(res[i].Topics[3].ToString(), 16).ToString();
-                logs.EventLogs.Add(log);
+            // Extract all the logs as specified by the filter input and add to the return list
+            foreach (FilterLog log in AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result.Reverse()) {
+                logs.Logs.Add(new BondLog(log));
             }
 
             // Return the list of bond logs
