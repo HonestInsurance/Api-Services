@@ -6,6 +6,8 @@
  */
 
 using System;
+using System.Reflection;
+using System.Runtime.Versioning;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,6 +53,7 @@ namespace ApiService
             Console.WriteLine("**********************************************************************************************");
             Console.WriteLine("***  Application Name    :  " + env.ApplicationName);
             Console.WriteLine("***  Hosting environment :  " + env.EnvironmentName);
+            Console.WriteLine("***  .NET Framework      :  " + Assembly.GetEntryAssembly()?.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName);
             Console.WriteLine("***  Web 3 URL endpoint  :  " + AppModelConfig.WEB3_URL_ENDPOINT);
             Console.WriteLine("***  Web Root Path       :  " + env.WebRootPath);
             Console.WriteLine("***  Content Root Path   :  " + env.ContentRootPath);

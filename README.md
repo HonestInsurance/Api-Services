@@ -27,7 +27,7 @@ For testing purposes, the entire Postman api collection can be accessed [here](h
 ## Looking under the hood
 
 This solution is implemented C# and the following technology stacks are used in this solution:
-* ASP .Net Core version [2.2.4](https://www.nuget.org/packages/Microsoft.AspNetCore.All)
+* ASP .Net Core LTS version [2.1.10](https://www.nuget.org/packages/Microsoft.AspNetCore.All)
 * ServiceStack .Net Core version [5.5.0](https://www.nuget.org/packages/ServiceStack.Core) (plus a valid license key)
 * Nethereum Web3 version [3.3.0](https://www.nuget.org/packages/Nethereum.Web3)
 * Fluent validation (Newtonsoft.Json) version [12.0.2](https://www.nuget.org/packages/Newtonsoft.Json)
