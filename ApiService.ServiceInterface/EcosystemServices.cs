@@ -103,24 +103,15 @@ namespace ApiService.ServiceInterface
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogPool").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
             
-            // Extract all the logs as specified by the filter input
-            var res = AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result;
+                        // Create return variable 
+            EcosystemLogs logs = new EcosystemLogs(){ Logs = new List<EcosystemLog>() };
 
-            // Create the return instance
-            var logs = new EcosystemLogs() { EventLogs = new List<EcosystemEventLog>() };
-
-            // Interate through all the returned logs and add them to the logs list
-            for (int i=res.Length - 1; i>=0; i--) {
-                logs.EventLogs.Add(new EcosystemEventLog() {
-                    BlockNumber = Convert.ToUInt64(res[i].BlockNumber.HexValue, 16),
-                    Subject = AppModelConfig.FromHexString(res[i].Topics[1].ToString()),            
-                    Day = Convert.ToUInt64(res[i].Topics[2].ToString(), 16),
-                    Value = Convert.ToUInt64(res[i].Topics[3].ToString(), 16),
-                    Timestamp = Convert.ToUInt64(res[i].Data.Substring(2 + 0 * 64, 64), 16)
-                });
+            // Extract all the logs as specified by the filter input and add to the return list
+            foreach (FilterLog log in AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result.Reverse()) {
+                logs.Logs.Add(new EcosystemLog(log));
             }
 
-            // Return the list of bond logs
+            // Return the list of ecosystem logs
             return logs;
         }
 

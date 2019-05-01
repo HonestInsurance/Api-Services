@@ -6,7 +6,10 @@
  */
 
 using ServiceStack;
+using System;
 using System.Collections.Generic;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
 
@@ -70,17 +73,29 @@ namespace ApiService.ServiceModel
         public ulong NextReconciliationDay { get; set; }
 
         [ApiMember(IsRequired = true, Description = "Log entries for this policy")]
-        public List<PolicyEventLog> EventLogs {get; set;}
+        public List<PolicyLog> Logs {get; set;}
     }
 
-    [FunctionOutput]
     public class PolicyLogs {
         [ApiMember(IsRequired = true, Description = "Policy log entries")]
-        public List<PolicyEventLog> EventLogs { get; set; }
+        public List<PolicyLog> Logs { get; set; }
     }
 
-    [FunctionOutput]
-    public class PolicyEventLog {
+    public class PolicyLog {
+
+        public PolicyLog(FilterLog fl){
+            BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
+            Hash = fl.Topics[1].ToString();
+            Owner = AppModelConfig.getAdrFromString32(fl.Topics[2].ToString());
+            Timestamp = Convert.ToUInt64(fl.Data.Substring(2 + 0 * 64, 64), 16);
+            State = (PolicyState)Convert.ToInt32(fl.Data.Substring(2 + 1 * 64,64), 16);
+            if (AppModelConfig.isEmptyHash(fl.Topics[3].ToString()) == true)
+                Info = "";
+            else if (fl.Topics[3].ToString().StartsWith("0x000000") == true)
+                Info = Convert.ToInt64(fl.Topics[3].ToString(), 16).ToString();
+            else Info = fl.Topics[3].ToString();
+        }
+
         [ApiMember(IsRequired = true, Description = "The block number this event was triggered")]
         public ulong BlockNumber { get; set; }
 

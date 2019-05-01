@@ -6,7 +6,10 @@
  */
 
 using ServiceStack;
+using System;
 using System.Collections.Generic;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
 
@@ -22,7 +25,7 @@ namespace ApiService.ServiceModel
     }
 
     [FunctionOutput]
-    public class BondDetail : IFunctionOutputDTO {
+    public class BondDetail {
         [ApiMember(IsRequired = true, Description = "The hash of the bond")]
         public string Hash { get; set; }
 
@@ -74,18 +77,29 @@ namespace ApiService.ServiceModel
         public string SecurityReferenceHash { get; set; }
 
         [ApiMember(IsRequired = true, Description = "Log entries for this bond")]
-        public List<BondEventLog> EventLogs {get; set;}
+        public List<BondLog> Logs {get; set;}
     }
 
-    [FunctionOutput]
     public class BondLogs {
         [ApiMember(IsRequired = true, Description = "Log entries")]
-        public List<BondEventLog> EventLogs {get; set;}
+        public List<BondLog> Logs {get; set;}
     }
 
-    [Event("LogBond")]
-    //event LogBond(bytes32 indexed bondHash, address indexed owner, bytes32 indexed info, uint timestamp, uint state);
-    public class BondEventLog : IEventDTO {
+    public class BondLog {
+
+        public BondLog(FilterLog fl){
+            BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
+            Hash = fl.Topics[1].ToString();
+            Owner = AppModelConfig.getAdrFromString32(fl.Topics[2].ToString());
+            Timestamp = Convert.ToUInt64(fl.Data.Substring(2 + 0 * 64, 64), 16);
+            State = (BondState)Convert.ToInt32(fl.Data.Substring(2 + 1 * 64,64), 16);
+            if (AppModelConfig.isEmptyHash(Hash))
+                Info = AppModelConfig.FromHexString(fl.Topics[3].ToString());
+            else if ((State == BondState.SecuredReferenceBond) || (State == BondState.LockedReferenceBond))
+                Info = fl.Topics[3].ToString().EnsureHexPrefix();
+            else Info = Convert.ToInt64(fl.Topics[3].ToString(), 16).ToString();
+        }
+
         [ApiMember(IsRequired = true, Description = "The block number this event was triggered")]
         public ulong BlockNumber { get; set; }
         

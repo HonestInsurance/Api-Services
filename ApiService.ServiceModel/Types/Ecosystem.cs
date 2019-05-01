@@ -6,7 +6,10 @@
  */
 
 using ServiceStack;
+using System;
 using System.Collections.Generic;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
 
@@ -66,8 +69,21 @@ namespace ApiService.ServiceModel
 
     }
 
-    [FunctionOutput]
-    public class EcosystemEventLog {
+    public class EcosystemLogs {
+        [ApiMember(IsRequired = true, Description = "Ecosystem log entries")]
+        public List<EcosystemLog> Logs {get; set;}
+    }
+
+    public class EcosystemLog {
+
+        public EcosystemLog(FilterLog fl){
+            BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
+            Subject = AppModelConfig.FromHexString(fl.Topics[1].ToString());          
+            Day = Convert.ToUInt64(fl.Topics[2].ToString(), 16);
+            Value = Convert.ToUInt64(fl.Topics[3].ToString(), 16);
+            Timestamp = Convert.ToUInt64(fl.Data.Substring(2 + 0 * 64, 64), 16);
+        }
+
         [ApiMember(IsRequired = true, Description = "The block number this event was triggered")]
         public ulong BlockNumber { get; set; }
         
@@ -82,12 +98,6 @@ namespace ApiService.ServiceModel
 
         [ApiMember(IsRequired = true, Description = "The timestamp this event was triggered")]
         public ulong Timestamp { get; set; }
-    }
-
-    [FunctionOutput]
-    public class EcosystemLogs {
-        [ApiMember(IsRequired = true, Description = "Ecosystem log entries")]
-        public List<EcosystemEventLog> EventLogs {get; set;}
     }
 
     [FunctionOutput]

@@ -6,7 +6,10 @@
  */
 
 using ServiceStack;
+using System;
 using System.Collections.Generic;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
 
@@ -40,18 +43,26 @@ namespace ApiService.ServiceModel
         public SettlementState State { get; set; }
 
         [ApiMember(IsRequired = true, Description = "Log entries for this settlement")]
-        public List<SettlementEventLog> EventLogs {get; set;}
+        public List<SettlementLog> EventLogs {get; set;}
     }
 
-
-    [FunctionOutput]
     public class SettlementLogs {
         [ApiMember(IsRequired = true, Description = "Settlement log entries")]
-        public List<SettlementEventLog> EventLogs { get; set; }
+        public List<SettlementLog> Logs { get; set; }
     }
 
     [FunctionOutput]
-    public class SettlementEventLog {
+    public class SettlementLog {
+
+        public SettlementLog(FilterLog fl){
+            BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
+            SettlementHash = fl.Topics[1].ToString();
+            AdjustorHash = fl.Topics[2].ToString();
+            Info = fl.Topics[3].ToString();
+            Timestamp = Convert.ToUInt64(fl.Data.Substring(2 + 0 * 64, 64), 16);
+            State = (SettlementState)Convert.ToInt32(fl.Data.Substring(2 + 1 * 64,64), 16);
+        }
+
         [ApiMember(IsRequired = true, Description = "The block number this event was triggered")]
         public ulong BlockNumber { get; set; }
 
