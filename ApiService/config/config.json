@@ -15,5 +15,5 @@
     "DefaultGasLimit": 4712388,
     "MaxWaitDurationForTransactionReceipt": 60,
     "DefaultNumberEntriesForLazyLoading": 100,
-    "DefaultBlockRangeForEventLogLoading": 1000000
+    "DefaultBlockRangeForEventLogLoading": 2000000
 }

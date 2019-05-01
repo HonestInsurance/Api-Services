@@ -62,12 +62,12 @@ namespace ApiService.ServiceInterface
             SettlementDetail settlement = contract.GetFunction("dataStorage").CallDeserializingToObjectAsync<SettlementDetail>(request.Hash.HexToByteArray()).Result;
             // Set the settlement hash to the requested has as specified in the request
             settlement.Hash = request.Hash;
-            settlement.EventLogs = new List<SettlementEventLog>();
+            settlement.EventLogs = new List<SettlementLog>();
 
             // If settlement hash is set retrieve the logs for the settlement
             if (AppModelConfig.isEmptyHash(settlement.Hash) == false) {
                 settlement.EventLogs = ((SettlementLogs)this.Get(
-                    new GetSettlementLogs {ContractAdr = request.ContractAdr, SettlementHash = request.Hash})).EventLogs;
+                    new GetSettlementLogs {ContractAdr = request.ContractAdr, SettlementHash = request.Hash})).Logs;
                 // Just for the Settlement specific event logs reverse the order to have the events in ascending order
                 settlement.EventLogs.Reverse();
             }
@@ -92,22 +92,12 @@ namespace ApiService.ServiceInterface
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogSettlement").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
             
-            // Extract all the logs as specified by the filter input
-            var res = AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result;
+            // Create return variable 
+            SettlementLogs logs = new SettlementLogs(){ Logs = new List<SettlementLog>() };
 
-            // Create the return instance
-            var logs = new SettlementLogs() { EventLogs = new List<SettlementEventLog>() };
-
-            // Interate through all the returned logs and add them to the logs list
-            for (int i=res.Length - 1; i>=0; i--) {
-                var log = new SettlementEventLog();
-                log.BlockNumber = Convert.ToUInt64(res[i].BlockNumber.HexValue, 16);
-                log.SettlementHash = res[i].Topics[1].ToString();
-                log.AdjustorHash = res[i].Topics[2].ToString();
-                log.Info = res[i].Topics[3].ToString();
-                log.Timestamp = Convert.ToUInt64(res[i].Data.Substring(2 + 0 * 64, 64), 16);
-                log.State = (SettlementState)Convert.ToInt32(res[i].Data.Substring(2 + 1 * 64,64), 16);
-                logs.EventLogs.Add(log);
+            // Extract all the logs as specified by the filter input and add to the return list
+            foreach (FilterLog log in AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result.Reverse()) {
+                logs.Logs.Add(new SettlementLog(log));
             }
 
             // Return the list of settlement logs

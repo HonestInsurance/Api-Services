@@ -50,8 +50,8 @@ namespace ApiService.ServiceInterface
             }
             else {
                 // Get all the log files that match the Policy owner's address specified
-                List<PolicyEventLog> logs = ((PolicyLogs)this.Get(
-                    new GetPolicyLogs { ContractAdr = request.ContractAdr, Owner = request.Owner })).EventLogs;
+                List<PolicyLog> logs = ((PolicyLogs)this.Get(
+                    new GetPolicyLogs { ContractAdr = request.ContractAdr, Owner = request.Owner })).Logs;
                 // Filter the list only for Created state entries and sort it with timestamp desc
                 var filteredList = logs.GroupBy(x => x.Hash).Select(x => x.FirstOrDefault()).ToList().OrderByDescending(o=>o.Timestamp).ToList();
                 // Iterate through the list
@@ -79,14 +79,14 @@ namespace ApiService.ServiceInterface
             PolicyDetail Policy = contract.GetFunction("dataStorage").CallDeserializingToObjectAsync<PolicyDetail>(request.Hash.HexToByteArray()).Result;
             // Set the Policy hash to the requested has as specified in the request
             Policy.Hash = request.Hash;
-            Policy.EventLogs = new List<PolicyEventLog>();
+            Policy.Logs = new List<PolicyLog>();
 
             // If Policy hash is set retrieve the logs for the Policy
             if (AppModelConfig.isEmptyHash(Policy.Hash) == false) {
-                Policy.EventLogs = ((PolicyLogs)this.Get(
-                    new GetPolicyLogs {ContractAdr = request.ContractAdr, Hash = request.Hash})).EventLogs;
+                Policy.Logs = ((PolicyLogs)this.Get(
+                    new GetPolicyLogs {ContractAdr = request.ContractAdr, Hash = request.Hash})).Logs;
                 // Just for the Policy specific event logs reverse the order to have the events in ascending order
-                Policy.EventLogs.Reverse();
+                Policy.Logs.Reverse();
             }
 
             // Return the Policy
@@ -117,30 +117,15 @@ namespace ApiService.ServiceInterface
             // Create the filter input to extract the requested log entries
             var filterInput = contract.GetEvent("LogPolicy").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
             
-            // Extract all the logs as specified by the filter input
-            var res = AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result;
+            // Create return variable 
+            PolicyLogs logs = new PolicyLogs(){ Logs = new List<PolicyLog>() };
 
-            // Create the return instance
-            var logs = new PolicyLogs() { EventLogs = new List<PolicyEventLog>() };
-
-            // Interate through all the returned logs and add them to the logs list
-            for (int i=res.Length - 1; i>=0; i--) {
-                var log = new PolicyEventLog();
-                log.BlockNumber = Convert.ToUInt64(res[i].BlockNumber.HexValue, 16);
-                log.Hash = res[i].Topics[1].ToString();        
-                log.Owner = AppModelConfig.getAdrFromString32(res[i].Topics[2].ToString());
-                log.Timestamp = Convert.ToUInt64(res[i].Data.Substring(2 + 0 * 64, 64), 16);
-                log.State = (PolicyState)Convert.ToInt32(res[i].Data.Substring(2 + 1 * 64,64), 16);
-
-                if (AppModelConfig.isEmptyHash(res[i].Topics[3].ToString()) == true)
-                    log.Info = "";
-                else if (res[i].Topics[3].ToString().StartsWith("0x000000") == true)
-                    log.Info = Convert.ToInt64(res[i].Topics[3].ToString(), 16).ToString();
-                else log.Info = res[i].Topics[3].ToString();
-                logs.EventLogs.Add(log);
+            // Extract all the logs as specified by the filter input and add to the return list
+            foreach (FilterLog log in AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result.Reverse()) {
+                logs.Logs.Add(new PolicyLog(log));
             }
 
-            // Return the list of Policy logs
+            // Return the list of policy logs
             return logs;
         }
 
