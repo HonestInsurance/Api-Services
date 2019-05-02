@@ -85,9 +85,9 @@ namespace ApiService.ServiceModel
         public List<BondLog> Logs {get; set;}
     }
 
-    public class BondLog {
+    public class BondLog : IParseLog {
 
-        public BondLog(FilterLog fl){
+        public void parseLog(FilterLog fl) {
             BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
             Hash = fl.Topics[1].ToString();
             Owner = AppModelConfig.getAdrFromString32(fl.Topics[2].ToString());

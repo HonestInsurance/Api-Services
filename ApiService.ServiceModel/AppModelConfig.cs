@@ -12,6 +12,7 @@ using ServiceStack;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
+using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Hex.HexConvertors.Extensions;
 
 
@@ -212,6 +213,13 @@ namespace ApiService.ServiceModel
             // Needs to start with 0x, is 42 characters in length and only contains 0-9 and a-f lower case characters
             return new Regex(@"((([0-9a-f]){64,64}))$").Match(privateKey).Success;
         }
+    }
+
+    /// <summary>
+    /// Interface that needs to be implemented by LogFile classes to enable the parsing of Ethereum log files
+    /// </summary>
+    public interface IParseLog {
+        void parseLog(FilterLog fl);
     }
 
     /// <summary>

@@ -94,40 +94,18 @@ namespace ApiService.ServiceInterface
         }
 
         public object Get(GetBondLogs request) {
-            // Retrieve the block parameters
-            (BlockParameter fromBlock, BlockParameter toBlock) = AppServices.getBlockParameterConfiguration(request.FromBlock, request.ToBlock, 
-                (request.Hash.IsEmpty() == true) && (request.Owner.IsEmpty() == true) && (request.Info.IsEmpty() == true));
-
-            // Create the filter variables for selecting only the requested log entries
-            object[] ft1 = (request.Hash.IsEmpty() == true ? null : new object[]{ request.Hash.HexToByteArray() });
-            object[] ft2 = (request.Owner.IsEmpty() == true ? null : new object[]{ request.Owner });
-            object[] ft3 = (request.Info.IsEmpty() == true ? null : new object[1]);
-
-            // Adjust the filterinput for ft3 if a value has been provided
-            if (request.Info.IsEmpty() == false) {
-                if (request.Info.HasHexPrefix() == true)
-                    ft3[0] = request.Info.HexToByteArray();
-                else if (uint.TryParse(request.Info, out uint val) == true)
-                    ft3[0] = val.ToString("X64").EnsureHexPrefix().HexToByteArray();
-                else ft3[0] = AppModelConfig.convertToHex64(request.Info).HexToByteArray();
-            }
-
-            // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BOND, AppServices.GetEcosystemAdr(request.ContractAdr).BondContractAdr);
-            
-            // Create the filter input to extract the requested log entries
-            var filterInput = contract.GetEvent("LogBond").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
-            
-            // Create return variable 
-            BondLogs logs = new BondLogs(){ Logs = new List<BondLog>() };
-
-            // Extract all the logs as specified by the filter input and add to the return list
-            foreach (FilterLog log in AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result.Reverse()) {
-                logs.Logs.Add(new BondLog(log));
-            }
-
-            // Return the list of bond logs
-            return logs;
+            // Return the requested log file entries
+            return new BondLogs() { Logs = new LogParser<BondLog>().parseLogs(
+                AppModelConfig.BOND,
+                AppServices.GetEcosystemAdr(request.ContractAdr).BondContractAdr,
+                "LogBond",
+                (request.Hash.IsEmpty() == true ? null : new object[]{ request.Hash.HexToByteArray() }),
+                (request.Owner.IsEmpty() == true ? null : new object[]{ request.Owner }),
+                (request.Info.IsEmpty() == true ? null : new object[1]),
+                request.FromBlock,
+                request.ToBlock,
+                (request.Hash.IsEmpty() == true) && (request.Owner.IsEmpty() == true) && (request.Info.IsEmpty() == true)
+            )};
         }
 
         public object Post(CreateBond request) {

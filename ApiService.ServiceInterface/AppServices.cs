@@ -174,4 +174,45 @@ namespace ApiService.ServiceInterface
             );
         }
     }
+
+    /// <summary>
+    /// Helper class enabling the parsing of log files by implementing the IParseLog interface
+    /// </summary>
+    public class LogParser<T> where T : IParseLog, new()
+    {
+        public List<T> parseLogs(
+            string abi, 
+            string contractAddress,
+            string eventName,
+            object[] ft1,
+            object[] ft2,
+            object[] ft3,
+            ulong fromBlock,
+            ulong toBlock,
+            bool useDefaultBlockParameterSetting) {
+
+            // Get the block parameters for searching log files
+            (BlockParameter fBlock, BlockParameter tBlock) = 
+                AppServices.getBlockParameterConfiguration(fromBlock, toBlock, useDefaultBlockParameterSetting);
+
+            // Create list containing the returned list of log files
+            List<T> logs = new List<T>();
+            
+            // Create the filter input to extract the requested log entries
+            var filterInput = AppServices.web3.Eth.GetContract(abi, contractAddress).GetEvent(eventName).CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fBlock, toBlock: tBlock);
+
+            // Add all the returned logs to the log list
+            foreach (FilterLog log in AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result.Reverse()) {
+                // Create a new Log Item
+                T logItem = new T();
+                // Parse the log into the logItem
+                logItem.parseLog(log);
+                // Add the log item to the list
+                logs.Add(logItem);
+            }
+
+            // Return the list of log files
+            return logs;
+        }
+    }
 }

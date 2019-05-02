@@ -59,9 +59,9 @@ namespace ApiService.ServiceModel
         public List<AdjustorLog> Logs { get; set; }
     }
 
-    public class AdjustorLog {
+    public class AdjustorLog : IParseLog {
 
-        public AdjustorLog(FilterLog fl){
+        public void parseLog(FilterLog fl) {
             BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
             Hash = fl.Topics[1].ToString();
             Owner = AppModelConfig.getAdrFromString32(fl.Topics[2].ToString());
