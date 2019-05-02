@@ -88,31 +88,18 @@ namespace ApiService.ServiceInterface
         }
 
         public object Get(GetEcosystemLogs request) {
-            // Retrieve the block parameters
-            (BlockParameter fromBlock, BlockParameter toBlock) = AppServices.getBlockParameterConfiguration(request.FromBlock, request.ToBlock, 
-                (request.Subject.IsEmpty() == true) && (request.Day == 0) && (request.Value == 0));
-
-            // Create the filter variables for selecting only the requested log entries
-            object[] ft1 = (request.Subject.IsEmpty() == true ? null : new object[]{ AppModelConfig.convertToHex64(request.Subject).HexToByteArray() });
-            object[] ft2 = (request.Day == 0 ? null : new object[]{ request.Day });
-            object[] ft3 = (request.Value == 0 ? null : new object[]{ request.Value });
-
-            // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.POOL, AppServices.GetEcosystemAdr(request.ContractAdr).PoolContractAdr);
-            
-            // Create the filter input to extract the requested log entries
-            var filterInput = contract.GetEvent("LogPool").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
-            
-                        // Create return variable 
-            EcosystemLogs logs = new EcosystemLogs(){ Logs = new List<EcosystemLog>() };
-
-            // Extract all the logs as specified by the filter input and add to the return list
-            foreach (FilterLog log in AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result.Reverse()) {
-                logs.Logs.Add(new EcosystemLog(log));
-            }
-
-            // Return the list of ecosystem logs
-            return logs;
+            // Return the requested log file entries
+            return new EcosystemLogs() { Logs = new LogParser<EcosystemLog>().parseLogs(
+                AppModelConfig.POOL,
+                AppServices.GetEcosystemAdr(request.ContractAdr).PoolContractAdr,
+                "LogPool",
+                (request.Subject.IsEmpty() == true ? null : new object[]{ AppModelConfig.convertToHex64(request.Subject).HexToByteArray() }),
+                (request.Day == 0 ? null : new object[]{ request.Day }),
+                (request.Value == 0 ? null : new object[]{ request.Value }), 
+                request.FromBlock,
+                request.ToBlock,
+                (request.Subject.IsEmpty() == true) && (request.Day == 0) && (request.Value == 0)
+            )};
         }
 
         public object Get(GetEcosystemConfiguration request) {
@@ -189,40 +176,18 @@ namespace ApiService.ServiceInterface
         // ********************************************************************************************
 
         public object Get(GetTrustLogs request) {
-            // Retrieve the block parameters
-            (BlockParameter fromBlock, BlockParameter toBlock) = AppServices.getBlockParameterConfiguration(request.FromBlock, request.ToBlock, 
-                (request.Subject.IsEmpty() == true) && (request.Address.IsEmpty() == true) && (request.Info.IsEmpty() == true));
-
-            // Create the filter variables for selecting only the requested log entries
-            object[] ft1 = (request.Subject.IsEmpty() == true ? null : new object[]{ AppModelConfig.convertToHex64(request.Subject).HexToByteArray() });
-            object[] ft2 = (request.Address.IsEmpty() == true ? null : new object[]{ request.Address });
-            object[] ft3 = (request.Info.IsEmpty() == true ? null : new object[]{ AppModelConfig.convertToHex64(request.Info).HexToByteArray() });
-
-            // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.TRUST, AppServices.GetEcosystemAdr(request.ContractAdr).TrustContractAdr);
-            
-            // Create the filter input to extract the requested log entries
-            var filterInput = contract.GetEvent("LogTrust").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
-            
-            // Extract all the logs as specified by the filter input
-            var res = AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result;
-
-            // Create the return instance
-            var logs = new TrustLogs() { EventLogs = new List<TrustEventLog>() };
-
-            // Interate through all the returned logs and add them to the logs list
-            for (int i=res.Length - 1; i>=0; i--) {
-                logs.EventLogs.Add(new TrustEventLog() {
-                    BlockNumber = Convert.ToUInt64(res[i].BlockNumber.HexValue, 16),
-                    Subject = AppModelConfig.FromHexString(res[i].Topics[1].ToString()),            
-                    Address = AppModelConfig.getAdrFromString32(res[i].Topics[2].ToString()),
-                    Info = res[i].Topics[3].ToString().Replace(AppModelConfig.EMPTY_HASH, ""),
-                    Timestamp = Convert.ToUInt64(res[i].Data.Substring(2 + 0 * 64, 64), 16)
-                });
-            }
-
-            // Return the list of bond logs
-            return logs;
+            // Return the requested log file entries
+            return new TrustLogs() { Logs = new LogParser<TrustLog>().parseLogs(
+                AppModelConfig.TRUST,
+                AppServices.GetEcosystemAdr(request.ContractAdr).TrustContractAdr,
+                "LogTrust",
+                (request.Subject.IsEmpty() == true ? null : new object[]{ AppModelConfig.convertToHex64(request.Subject).HexToByteArray() }),
+                (request.Address.IsEmpty() == true ? null : new object[]{ request.Address }),
+                (request.Info.IsEmpty() == true ? null : new object[]{ AppModelConfig.convertToHex64(request.Info).HexToByteArray() }), 
+                request.FromBlock,
+                request.ToBlock,
+                (request.Subject.IsEmpty() == true) && (request.Address.IsEmpty() == true) && (request.Info.IsEmpty() == true)
+            )};
         }
 
         // ********************************************************************************************

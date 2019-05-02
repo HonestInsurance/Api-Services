@@ -6,20 +6,37 @@
  */
  
 using ServiceStack;
+using System;
 using System.Collections.Generic;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
 
 namespace ApiService.ServiceModel
 {   
-    [FunctionOutput]
     public class BankLogs {
         [ApiMember(IsRequired = true, Description = "Bank transaction log entries")]
-        public List<BankEventLog> EventLogs {get; set;}
+        public List<BankLog> Logs {get; set;}
     }
 
-    [FunctionOutput]
-    public class BankEventLog {
+    public class BankLog : IParseLog {
+
+        public void parseLog(FilterLog fl) {
+            BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
+            InternalReferenceHash = fl.Topics[1].ToString();
+            AccountType = (AccountType)Convert.ToUInt64(fl.Topics[2].ToString(), 16);
+            Success = fl.Topics[3].ToString().EndsWith("1");
+            PaymentAccountHash = fl.Data.Substring(2 + 0 * 64, 64).EnsureHexPrefix();
+            PaymentSubject = fl.Data.Substring(2 + 1 * 64, 64).EnsureHexPrefix().StartsWith("0x000000") ?
+                Convert.ToUInt64(fl.Data.Substring(2 + 1 * 64, 64), 16).ToString() :
+                fl.Data.Substring(2 + 1 * 64, 64).EnsureHexPrefix();
+            Info = AppModelConfig.isEmptyHash(fl.Data.Substring(2 + 2 * 64, 64).EnsureHexPrefix()) ? "0x0" : AppModelConfig.FromHexString(fl.Data.Substring(2 + 2 * 64, 64));
+            Timestamp = Convert.ToUInt64(fl.Data.Substring(2 + 3 * 64, 64), 16);
+            TransactionType = (TransactionType)Convert.ToUInt64(fl.Data.Substring(2 + 4 * 64, 64), 16);
+            Amount = Convert.ToUInt64(fl.Data.Substring(2 + 5 * 64, 64), 16);
+        }
+
         [ApiMember(IsRequired = true, Description = "The block number this event was triggered")]
         public ulong BlockNumber { get; set; }
         

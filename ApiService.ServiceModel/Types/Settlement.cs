@@ -51,10 +51,9 @@ namespace ApiService.ServiceModel
         public List<SettlementLog> Logs { get; set; }
     }
 
-    [FunctionOutput]
-    public class SettlementLog {
+    public class SettlementLog : IParseLog {
 
-        public SettlementLog(FilterLog fl){
+        public void parseLog(FilterLog fl) {
             BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
             SettlementHash = fl.Topics[1].ToString();
             AdjustorHash = fl.Topics[2].ToString();

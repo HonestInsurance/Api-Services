@@ -22,47 +22,18 @@ namespace ApiService.ServiceInterface
     public class BankServices : Service
     {
         public object Get(GetBankLogs request) {
-            // Retrieve the block parameters
-            (BlockParameter fromBlock, BlockParameter toBlock) = AppServices.getBlockParameterConfiguration(request.FromBlock, request.ToBlock, 
-                (request.Success == SuccessFilter.All) && (request.InternalReferenceHash.IsEmpty() == true));
-
-            // Create the filter variables for selecting only the requested log entries
-            object[] ft1 = (request.InternalReferenceHash.IsEmpty() == true ? null : new object[]{ request.InternalReferenceHash.HexToByteArray() });
-            object[] ft2 = {(uint)request.AccountType};
-            object[] ft3 = (request.Success == SuccessFilter.All ? null : (request.Success == SuccessFilter.Positive ? new object[]{ true } : new object[]{ false }));
-
-            // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.BANK, AppServices.GetEcosystemAdr(request.ContractAdr).BankContractAdr);
-            
-            // Create the filter input to extract the requested log entries
-            var filterInput = contract.GetEvent("LogBank").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
-            
-            // Extract all the logs as specified by the filter input
-            var res = AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result;
-
-            // Create the return instance
-            var logs = new BankLogs() { EventLogs = new List<BankEventLog>() };
-
-            // Interate through all the returned logs and add them to the logs list
-            for (int i=res.Length - 1; i>=0; i--) {
-                var log = new BankEventLog();
-                log.BlockNumber = Convert.ToUInt64(res[i].BlockNumber.HexValue, 16);
-                log.InternalReferenceHash = res[i].Topics[1].ToString();
-                log.AccountType = (AccountType)Convert.ToUInt64(res[i].Topics[2].ToString(), 16);
-                log.Success = res[i].Topics[3].ToString().EndsWith("1");
-                log.PaymentAccountHash = res[i].Data.Substring(2 + 0 * 64, 64).EnsureHexPrefix();
-                log.PaymentSubject = res[i].Data.Substring(2 + 1 * 64, 64).EnsureHexPrefix().StartsWith("0x000000") ?
-                    Convert.ToUInt64(res[i].Data.Substring(2 + 1 * 64, 64), 16).ToString() :
-                    res[i].Data.Substring(2 + 1 * 64, 64).EnsureHexPrefix();
-                log.Info = AppModelConfig.isEmptyHash(res[i].Data.Substring(2 + 2 * 64, 64).EnsureHexPrefix()) ? "0x0" : AppModelConfig.FromHexString(res[i].Data.Substring(2 + 2 * 64, 64));
-                log.Timestamp = Convert.ToUInt64(res[i].Data.Substring(2 + 3 * 64, 64), 16);
-                log.TransactionType = (TransactionType)Convert.ToUInt64(res[i].Data.Substring(2 + 4 * 64, 64), 16);
-                log.Amount = Convert.ToUInt64(res[i].Data.Substring(2 + 5 * 64, 64), 16);
-                logs.EventLogs.Add(log);
-            }
-
-            // Return the list of bond logs
-            return logs;
+            // Return the requested log file entries
+            return new BankLogs() { Logs = new LogParser<BankLog>().parseLogs(
+                AppModelConfig.BANK,
+                AppServices.GetEcosystemAdr(request.ContractAdr).BankContractAdr,
+                "LogBank",
+                (request.InternalReferenceHash.IsEmpty() == true ? null : new object[]{ request.InternalReferenceHash.HexToByteArray() }),
+                new object[]{(uint)request.AccountType},
+                (request.Success == SuccessFilter.All ? null : (request.Success == SuccessFilter.Positive ? new object[]{ true } : new object[]{ false })),
+                request.FromBlock,
+                request.ToBlock,
+                (request.Success == SuccessFilter.All) && (request.InternalReferenceHash.IsEmpty() == true)
+            )};
         }
 
         public object Get(GetBankPaymentAdviceList request) {

@@ -77,31 +77,18 @@ namespace ApiService.ServiceInterface
         }
 
         public object Get(GetSettlementLogs request) {
-            // Retrieve the block parameters
-            (BlockParameter fromBlock, BlockParameter toBlock) = AppServices.getBlockParameterConfiguration(request.FromBlock, request.ToBlock, 
-                (request.SettlementHash.IsEmpty() == true) && (request.AdjustorHash.IsEmpty() == true) && (request.Info.IsEmpty() == true));
-
-            // Create the filter variables for selecting only the requested log entries
-            object[] ft1 = (request.SettlementHash.IsEmpty() == true ? null : new object[]{ request.SettlementHash.HexToByteArray() });
-            object[] ft2 = (request.AdjustorHash.IsEmpty() == true ? null : new object[]{ request.AdjustorHash.HexToByteArray() });
-            object[] ft3 = (request.Info.IsEmpty() == true ? null : new object[]{ request.Info.HexToByteArray() });
-
-            // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.SETTLEMENT, AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr);
-            
-            // Create the filter input to extract the requested log entries
-            var filterInput = contract.GetEvent("LogSettlement").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
-            
-            // Create return variable 
-            SettlementLogs logs = new SettlementLogs(){ Logs = new List<SettlementLog>() };
-
-            // Extract all the logs as specified by the filter input and add to the return list
-            foreach (FilterLog log in AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result.Reverse()) {
-                logs.Logs.Add(new SettlementLog(log));
-            }
-
-            // Return the list of settlement logs
-            return logs;
+            // Return the requested log file entries
+            return new SettlementLogs() { Logs = new LogParser<SettlementLog>().parseLogs(
+                AppModelConfig.SETTLEMENT,
+                AppServices.GetEcosystemAdr(request.ContractAdr).SettlementContractAdr,
+                "LogSettlement",
+                (request.SettlementHash.IsEmpty() == true ? null : new object[]{ request.SettlementHash.HexToByteArray() }),
+                (request.AdjustorHash.IsEmpty() == true ? null : new object[]{ request.AdjustorHash.HexToByteArray() }),
+                (request.Info.IsEmpty() == true ? null : new object[]{ request.Info.HexToByteArray() }),
+                request.FromBlock,
+                request.ToBlock,
+                (request.SettlementHash.IsEmpty() == true) && (request.AdjustorHash.IsEmpty() == true) && (request.Info.IsEmpty() == true)
+            )};
         }
 
         public object Post(CreateSettlement request) {

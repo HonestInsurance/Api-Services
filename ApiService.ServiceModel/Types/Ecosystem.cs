@@ -66,7 +66,6 @@ namespace ApiService.ServiceModel
         public ListInfo AdjustorListInfo  { get; set; }
         [ApiMember(IsRequired = true, Description = "Info on the settlements")]
         public ListInfo SettlementListInfo  { get; set; }
-
     }
 
     public class EcosystemLogs {
@@ -74,9 +73,9 @@ namespace ApiService.ServiceModel
         public List<EcosystemLog> Logs {get; set;}
     }
 
-    public class EcosystemLog {
+    public class EcosystemLog : IParseLog {
 
-        public EcosystemLog(FilterLog fl){
+        public void parseLog(FilterLog fl) {
             BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
             Subject = AppModelConfig.FromHexString(fl.Topics[1].ToString());          
             Day = Convert.ToUInt64(fl.Topics[2].ToString(), 16);
@@ -210,8 +209,21 @@ namespace ApiService.ServiceModel
     // *** TRUST
     // ********************************************************************************************
 
-    [FunctionOutput]
-    public class TrustEventLog {
+    public class TrustLogs {
+        [ApiMember(IsRequired = true, Description = "Trust log entries")]
+        public List<TrustLog> Logs {get; set;}
+    }
+
+    public class TrustLog : IParseLog {
+
+        public void parseLog(FilterLog fl) {
+            BlockNumber = Convert.ToUInt64(fl.BlockNumber.HexValue, 16);
+            Subject = AppModelConfig.FromHexString(fl.Topics[1].ToString());          
+            Address = AppModelConfig.getAdrFromString32(fl.Topics[2].ToString());
+            Info = fl.Topics[3].ToString().Replace(AppModelConfig.EMPTY_HASH, "");
+            Timestamp = Convert.ToUInt64(fl.Data.Substring(2 + 0 * 64, 64), 16);
+        }
+
         [ApiMember(IsRequired = true, Description = "The block number this event was triggered")]
         public ulong BlockNumber { get; set; }
         
@@ -226,12 +238,6 @@ namespace ApiService.ServiceModel
 
         [ApiMember(IsRequired = true, Description = "The timestamp this event was triggered")]
         public ulong Timestamp { get; set; }
-    }
-
-    [FunctionOutput]
-    public class TrustLogs {
-        [ApiMember(IsRequired = true, Description = "Trust log entries")]
-        public List<TrustEventLog> EventLogs {get; set;}
     }
 
     // ********************************************************************************************

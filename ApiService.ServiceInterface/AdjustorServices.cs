@@ -77,39 +77,18 @@ namespace ApiService.ServiceInterface
         }
 
         public object Get(GetAdjustorLogs request) {
-            // Retrieve the block parameters
-            (BlockParameter fromBlock, BlockParameter toBlock) = AppServices.getBlockParameterConfiguration(request.FromBlock, request.ToBlock, 
-                (request.Hash.IsEmpty() == true) && (request.Owner.IsEmpty() == true) && (request.Info.IsEmpty() == true));
-
-            // Create the filter variables for selecting only the requested log entries
-            object[] ft1 = (request.Hash.IsEmpty() == true ? null : new object[]{ request.Hash.HexToByteArray() });
-            object[] ft2 = (request.Owner.IsEmpty() == true ? null : new object[]{ request.Owner });
-            object[] ft3 = (request.Info.IsEmpty() == true ? null : new object[1]);
-
-            // Adjust the filterinpu for ft3 if a value has been provided
-            if (request.Info.IsEmpty() == false) {
-                if (request.Info.HasHexPrefix() == true)
-                    ft3[0] = request.Info.HexToByteArray();
-                else if (uint.TryParse(request.Info, out uint val) == true)
-                    ft3[0] = val.ToString("X64").EnsureHexPrefix().HexToByteArray();
-            }
-
-            // Retrieve the contract info
-            var contract = AppServices.web3.Eth.GetContract(AppModelConfig.ADJUSTOR, AppServices.GetEcosystemAdr(request.ContractAdr).AdjustorContractAdr);
-            
-            // Create the filter input to extract the requested log entries
-            var filterInput = contract.GetEvent("LogAdjustor").CreateFilterInput(filterTopic1: ft1, filterTopic2: ft2, filterTopic3: ft3, fromBlock: fromBlock, toBlock: toBlock);
-
-            // Create return variable 
-            AdjustorLogs logs = new AdjustorLogs(){ Logs = new List<AdjustorLog>() };
-
-            // Extract all the logs as specified by the filter input and add to the return list
-            foreach (FilterLog log in AppServices.web3.Eth.Filters.GetLogs.SendRequestAsync(filterInput).Result.Reverse()) {
-                logs.Logs.Add(new AdjustorLog(log));
-            }
-
-            // Return the list of bond logs
-            return logs;
+            // Return the requested log file entries
+            return new AdjustorLogs() { Logs = new LogParser<AdjustorLog>().parseLogs(
+                AppModelConfig.ADJUSTOR,
+                AppServices.GetEcosystemAdr(request.ContractAdr).AdjustorContractAdr,
+                "LogAdjustor",
+                (request.Hash.IsEmpty() == true ? null : new object[]{ request.Hash.HexToByteArray() }),
+                (request.Owner.IsEmpty() == true ? null : new object[]{ request.Owner }),
+                (request.Info.IsEmpty() == true ? null : new object[1]),
+                request.FromBlock,
+                request.ToBlock,
+                (request.Hash.IsEmpty() == true) && (request.Owner.IsEmpty() == true) && (request.Info.IsEmpty() == true)
+            )};
         }
 
         public object Post(CreateAdjustor request) {
